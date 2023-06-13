@@ -1,10 +1,7 @@
 Dockerfile
 .dockerignore
 node_modules
-src/stories
-**/*.stories
 README.md
 .next
-.storybook
 .git
 .github
