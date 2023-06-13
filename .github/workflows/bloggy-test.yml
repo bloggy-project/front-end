@@ -1,46 +1,39 @@
-##workflow의 이름 지정
 name: Bloggy-Test
-##동작 트리거 설정
 on:
   pull_request:
     branches: ['develop']
-##jobs는 여러 steps들로 구성되어 있다.
 jobs:
   Run-test:
-    ##runs-on : 작업환경 설정
     runs-on: ubuntu-latest
     steps:
-      - name: checkout source code
-        ##1. checkout : repository에서 특정 브랜치로 전환하는 작업을 의미.
-        ##1-1. 하지만 checkout을 하기 전에 코드를 내려받아야 브랜치를 전환할 수 있다.env:
-        ##1-2. actions/checkout : github가 제공하는 checkout action은 원격 저장소의 코드를 CI서버에 내려받은 후 checkout까지의 과정을 미리 세팅해놓은 것이다.
-        ##2. actions : 반복되는 작업 단계를 재사용할 수 있도록 구성된 컴포넌트이다.
-        ##2-1. git hub가 공유하는 액션을 사용하려면 actions/{저장소@참조자} 로 명시해서 사용.
+      - name: Checkout source code
         uses: actions/checkout@v3
-      - name: set node
+      - name: Set node-version 16.17.0
         uses: actions/setup-node@v3
         with:
           node-version: 16.17.0
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
         run: echo "dir=$(yarn cache dir)" >> $GITHUB_OUTPUT
-      ##1. actions/cache : 파일들을 github 캐시에 올려 >> $GITHUB_OUTPUT놓고 사용한다. 설정한 키에 해당하는 데이터가 캐시에 존재하면 해당 데이터들을 내려받는다.
-      ##존재하지 않으면, 파일들을 캐시에 올려 놓는다.
-      ##1-1. cache actions에는 두 가지 옵션을 필수적으로 설정해줘야 한다.
-      ##1-2. path : 캐싱할 파일들이 있는 경로 지정
-      ##1-3. key : 캐싱 여부를 구분할 key
+      #1. actions/cache : 파일들을 github 캐시에 올려 >> $GITHUB_OUTPUT놓고 사용한다. 설정한 키에 해당하는 데이터가 캐시에 존재하면 해당 데이터들을 내려받는다.
+      #존재하지 않으면, 파일들을 캐시에 올려 놓는다.
+      #1-1. cache actions에는 두 가지 옵션을 필수적으로 설정해줘야 한다.
+      #1-2. path : 캐싱할 파일들이 있는 경로 지정
+      #1-3. key : 캐싱 여부를 구분할 key
       - uses: actions/cache@v3
-        id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
+        id: yarn-cache
         with:
           path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-yarn-
       - name: Install Dependencies
-        # if: steps.yarn-cache.outputs.cache-hit != 'true'
-        # yarn cache 문제 발생 원인 확인까지 주석처리
-        run: yarn install --legacy-peer-deps
-      #cpu코어 수를 감지한 후 계산후 구동 시 적용하여 최적화
+        if: steps.yarn-cache.outputs.cache-hit != 'true'
+        run: yarn install
+      #실행환경에서 cpu코어 수를 계산하여 병렬 테스트 수행. 소규모 테스트일 경우에는 역효과일 수 있음.
       #https://jestjs.io/docs/troubleshooting
-      - name: test...
-        run: yarn test
+      - name: Get number of CPU cores
+        id: cpu-cores
+        uses: SimenB/github-actions-cpu-cores@v1
+      - name: Run tests
+        run: yarn test --max-workers ${{ steps.cpu-cores.outputs.count }}
