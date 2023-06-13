@@ -1,7 +1,8 @@
 Dockerfile
 .dockerignore
 node_modules
-stories
+src/stories
+**/*.stories
 README.md
 .next
 .storybook
