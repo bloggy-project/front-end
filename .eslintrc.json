@@ -1,7 +1,25 @@
 {
+  "root": true,
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  },
+  "ignorePatterns": ["node_modules/"],
+  "env": {
+    "browser": true,
+    "node": true,
+    "es6": true
+  },
+  "plugins": ["@typescript-eslint", "jest-dom", "testing-library"],
   "extends": [
+    "plugin:@typescript-eslint/recommended",
+    "plugin:prettier/recommended",
     "next/core-web-vitals",
-    "plugin:storybook/recommended",
-    "plugin:jest/recommended"
-  ]
+    "plugin:jest/recommended",
+    "plugin:jest-dom/recommended"
+  ],
+  "rules": {
+    "@typescript-eslint/dot-notation": "error",
+    "no-useless-catch": "off" // 불필요한 catch 못쓰게 하는 기능 끔
+  }
 }
