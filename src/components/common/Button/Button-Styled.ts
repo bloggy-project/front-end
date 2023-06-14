@@ -10,20 +10,23 @@ const getSize = ({ size = 'md' }) => {
   switch (size) {
     case 'sm': {
       return css`
-        font-size: 12px;
-        padding: 6px 12px;
+        font-size: 1.4rem;
+        font-weight: 650;
+        padding: 0.5rem 0.7rem;
       `;
     }
     case 'lg': {
       return css`
-        font-size: 16px;
-        padding: 10px 16px;
+        font-size: 1.8rem;
+        font-weight: 700;
+        padding: 0.8rem 1rem;
       `;
     }
     default: {
       return css`
-        font-size: 14px;
-        padding: 8px 14px;
+        font-size: 1.6rem;
+        font-weight: 700;
+        padding: 0.6rem 0.8rem;
       `;
     }
   }
@@ -34,7 +37,7 @@ export const StyledButton = styled.button<StyledButtonProps>`
   border: none;
   color: white;
   display: inline-block;
-  border-radius: 8px;
+  border-radius: 1.8rem;
   background-color: ${(props) => props.color};
   ${(props) => getSize(props)}
   ${(props) =>
