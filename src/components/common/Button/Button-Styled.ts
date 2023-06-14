@@ -43,5 +43,8 @@ export const StyledButton = styled.button<StyledButtonProps>`
       &:hover {
         opacity: 0.8;
       }
+      &:active {
+        opacity: 0.6;
+      }
     `}
 `;
