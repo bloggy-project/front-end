@@ -1,4 +1,4 @@
-import { StyledButton } from '@/components/common/Button/Button-Styled';
+import { StyledButton } from '@/components/Button/Button-Styled';
 
 type ButtonProps = {
   onClick: () => void;

@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import UserEvent from '@testing-library/user-event';
-import NavbarButton from '@/components/structure/Navbar/NavbarButton';
-import Modal from '@/components/common/Modal/Modal';
+import NavbarButton from '@/components/Navbar/NavbarButton';
+import Modal from '@/components/Modal/Modal';
 
 describe('NavBar Test : Button, Modal', () => {
   it('NavbarButton render', () => {

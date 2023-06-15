@@ -1,4 +1,4 @@
-import ModalWrapper from './ModarWrapper';
+import ModalWrapper from './ModalWrapper';
 import { StyledModal } from './Modal-Styled';
 
 type ModalProps = {

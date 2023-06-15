@@ -1,6 +1,6 @@
-import Button from '@/components/common/Button/Button';
+import Button from '@/components/Button/Button';
 import { PALETTE } from '@/assets/color';
-import Modal from '@/components/common/Modal/Modal';
+import Modal from '@/components/Modal/Modal';
 import useModal from '@/hooks/useModal';
 
 const NavbarButton = () => {
