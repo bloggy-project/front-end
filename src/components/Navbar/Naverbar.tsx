@@ -1,4 +1,4 @@
-import Logo from '@/components/common/Logo/Logo';
+import Logo from '@/components/Logo/Logo';
 import { NavbarWrapper } from './NavbarWrapper-Styled';
 import NavbarButton from './NavbarButton';
 
