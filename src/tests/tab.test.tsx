@@ -6,7 +6,7 @@ describe('Tab Test', () => {
   it('Tab change on click', async () => {
     render(<Tab />);
     const button = screen.getByRole('button', {
-      name: '게시물',
+      name: '블로거',
     });
     await UserEvent.click(button);
     const contents = screen.getByTestId('blogger-contents');
