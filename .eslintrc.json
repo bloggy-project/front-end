@@ -19,6 +19,7 @@
     "plugin:jest-dom/recommended"
   ],
   "rules": {
+    "react-hooks/exhaustive-deps": "off",
     "@typescript-eslint/dot-notation": "error",
     "no-useless-catch": "off" // 불필요한 catch 못쓰게 하는 기능 끔
   }
