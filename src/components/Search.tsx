@@ -1,7 +1,6 @@
 'use client';
-import axios, { AxiosResponse } from 'axios';
-import { useState, useEffect } from 'react';
-import { searchResultData } from '../mocks/api/data/searchResultData';
+import axios from 'axios';
+import { useState } from 'react';
 // import '@/mocks';
 
 type responseProps = {
@@ -39,8 +38,8 @@ export default function Search() {
     <div>
       <button onClick={() => fetchData()}>text</button>
       <div>
-        {data.map((datas) => (
-          <li key={datas.title}>{datas.title}</li>
+        {data.map((datas, index) => (
+          <li key={datas.title + index}>{datas.title}</li>
         ))}
       </div>
     </div>
