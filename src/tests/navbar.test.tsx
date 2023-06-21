@@ -13,7 +13,7 @@ describe('NavBar Test : Button, Modal', () => {
   });
 
   it('Modal render', () => {
-    render(<Modal isOpen={true} toggleModal={jest.fn()} />);
+    render(<Modal isOpen={true} onChangeOpen={jest.fn()} />);
     const modal = screen.getByTestId('modal');
     expect(modal).toBeInTheDocument();
   });

@@ -9,8 +9,13 @@ const useToggle = (ref?: RefObject<HTMLElement>) => {
 
   const closeByOutside = (e: MouseEvent) => {
     if (ref?.current && !ref.current?.contains(e.target as Node)) {
+      console.log(12);
       setIsOpen(false);
     }
+  };
+
+  const closeOnly = () => {
+    setIsOpen(false);
   };
 
   useEffect(() => {
@@ -25,6 +30,7 @@ const useToggle = (ref?: RefObject<HTMLElement>) => {
   return {
     isOpen,
     onChangeOpen,
+    closeOnly,
   };
 };
 

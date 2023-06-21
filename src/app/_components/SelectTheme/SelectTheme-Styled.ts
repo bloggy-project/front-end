@@ -15,7 +15,7 @@ export const StyledTabButtonContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 30rem;
+  width: 28rem;
   margin-top: 7rem;
 `;
 

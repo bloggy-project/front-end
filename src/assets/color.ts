@@ -7,3 +7,10 @@ export const PALETTE = {
   TWISTED2: '#FFEDCB',
   SWITCH: '#E19F20',
 };
+
+export const EFFECT = {
+  BACK: '#f4f7fb',
+  SHADOW: '#d5d8df',
+  HOVER_BACK: '#b7b7c3',
+  SELECTED: ' #009df7',
+};
