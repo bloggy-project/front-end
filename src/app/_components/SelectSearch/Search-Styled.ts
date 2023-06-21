@@ -8,7 +8,7 @@ const changeWidth = keyframes`
 from{
     width: 3rem;
 }to{
-    width: 24rem;
+    width: 25rem;
 }
 `;
 
@@ -31,13 +31,14 @@ const getIsOpened = ({ isopen }: StyledSearchInputProps) => {
 
 export const StyledSearchContainer = styled.div`
   display: flex;
-  width: 40rem;
-  /* justify-content: center; */
+  width: 39rem;
   align-items: center;
 `;
 
 export const StyledSearchButton = styled.button`
-  margin-left: 0.5rem;
+  position: relative;
+  right: 4.5rem;
+  margin-left: 2.5rem;
   cursor: pointer;
   background-color: transparent;
   border-color: transparent;
@@ -54,10 +55,10 @@ export const StyledSearchButton = styled.button`
 export const StyledSearchInput = styled.input<StyledSearchInputProps>`
   position: relative;
   width: 3rem;
-  left: 3rem;
-  margin-left: 0.5rem;
-  padding: 0.3rem 2.6rem 0.3rem 0.6rem;
+  padding: 0.4rem 2.5rem 0.4rem 0.7rem;
   font-size: 1.6rem;
   outline: none;
+  border: none;
+  border-bottom: 1px solid gray;
   ${(props) => getIsOpened(props)}
 `;

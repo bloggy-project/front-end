@@ -10,7 +10,13 @@ export const TABS = [
 ];
 
 export const OPTIONS = [
-  { name: '최신 순', value: 'desc' },
-  { name: '오래된 순', value: 'order' },
-  { name: '인기 순', value: 'hot' },
+  { name: '오늘', value: 'day' },
+  { name: '이번 주', value: 'week' },
+  { name: '이번 달', value: 'month' },
+  { name: '올해', value: 'year' },
+];
+
+export const OPTIONTHEME = [
+  { name: '최신순', hasOption: false },
+  { name: `인기순`, hasOption: true },
 ];
