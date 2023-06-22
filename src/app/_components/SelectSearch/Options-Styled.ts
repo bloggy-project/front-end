@@ -31,6 +31,7 @@ export const StyledOptions = styled.div`
   background-color: ${effect.BACK};
   box-shadow: 0.1rem 0.1rem 0.1rem 0.1rem ${effect.SHADOW};
   cursor: pointer;
+  z-index: 88;
   :last-child {
     border-bottom: none;
   }
