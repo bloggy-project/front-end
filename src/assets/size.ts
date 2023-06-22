@@ -1,3 +1,3 @@
 export const LAYOUT = {
-  WIDTH: '130rem',
+  WIDTH: '129rem',
 };
