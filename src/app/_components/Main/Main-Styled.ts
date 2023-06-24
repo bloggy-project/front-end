@@ -1,9 +1,9 @@
 import styled from 'styled-components';
-import { LAYOUT } from '@/assets/size';
+import { Layout } from '@/assets/size';
 
 export const StyledMain = styled.main`
   display: flex;
-  width: ${LAYOUT.WIDTH};
+  width: ${Layout.WIDTH};
   flex-wrap: wrap;
   align-items: center;
   background-color: lightcoral;

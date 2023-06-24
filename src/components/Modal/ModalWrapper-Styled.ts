@@ -1,4 +1,12 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
+
+const changeBackground = keyframes`
+from{
+  background-color: rgba(0, 0, 0, 0);
+}to{
+  background-color: rgba(0, 0, 0, 0.2);
+}
+`;
 
 export const StyledModalWrapper = styled.div`
   position: fixed;
@@ -6,11 +14,9 @@ export const StyledModalWrapper = styled.div`
   left: 0;
   bottom: 0;
   right: 0;
-  /* display: flex;
-  align-items: center;
-  justify-content: center; */
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.2);
+  animation: ${changeBackground} 0.3s ease-in;
+  animation-fill-mode: forwards;
   z-index: 10;
 `;

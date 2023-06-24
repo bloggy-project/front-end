@@ -1,6 +1,7 @@
 import ModalWrapper from './ModalWrapper';
 import { StyledModal } from './Modal-Styled';
 import { useEffect } from 'react';
+import AuthTheme from '../ModalContent/ModalContent';
 
 type ModalProps = {
   isOpen: boolean;
@@ -34,7 +35,9 @@ const Modal = ({ isOpen, onChangeOpen }: ModalProps) => {
     <>
       {isOpen && (
         <ModalWrapper onClick={onlyToggledInWrapper}>
-          <StyledModal data-testid="modal">모달</StyledModal>
+          <StyledModal data-testid="modal">
+            <AuthTheme />
+          </StyledModal>
         </ModalWrapper>
       )}
     </>

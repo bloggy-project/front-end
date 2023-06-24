@@ -1,14 +1,14 @@
-export const SIG = '#1187CF';
+export const Sig = '#1187CF'; //하늘색 - 메인 화면 nav버튼 색
 
-export const PALETTE = {
-  SPOT1: '#67BCFF',
-  SPOT2: '#D8F3FF',
-  TWISTED1: '#E19F20',
-  TWISTED2: '#FFEDCB',
-  SWITCH: '#E19F20',
+export const Palette = {
+  SPOT1: '#67BCFF', //아주 살짝 연한 하늘색
+  SPOT2: '#D8F3FF', //매우 연한 하늘색
+  TWISTED1: '#E19F20', //주황색
+  TWISTED2: '#FFEDCB', //매우 연한 주황색
+  SWITCH: '#E19F20', //진한 주황색
 };
 
-export const EFFECT = {
+export const Effect = {
   BACK: '#f4f7fb',
   SHADOW: '#d5d8df',
   HOVER_BACK: '#b7b7c3',

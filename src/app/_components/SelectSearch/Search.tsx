@@ -1,7 +1,7 @@
 import { ChangeEvent } from 'react';
 import {
   StyledSearchButton,
-  StyledSearchContainer,
+  StyledSearch,
   StyledSearchInput,
 } from './Search-Styled';
 import useToggle from '@/hooks/useToggle';
@@ -39,7 +39,7 @@ const Search = () => {
   }, [theme]);
 
   return (
-    <StyledSearchContainer>
+    <StyledSearch>
       <StyledSearchInput
         ref={inputRef}
         type="text"
@@ -49,7 +49,7 @@ const Search = () => {
       <StyledSearchButton onClick={onChangeOpen}>
         <BsSearch className="SearchButton" />
       </StyledSearchButton>
-    </StyledSearchContainer>
+    </StyledSearch>
   );
 };
 

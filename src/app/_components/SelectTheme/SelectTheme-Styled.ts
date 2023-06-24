@@ -1,25 +1,10 @@
 import styled, { css } from 'styled-components';
 
-type StyledTabButtonProps = {
+export type StyledTabButtonProps = {
   active: 'active' | 'deactive';
 };
 
-export const StyledTabContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-`;
-
-export const StyledTabButtonContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 28rem;
-  margin-top: 7rem;
-`;
-
-const getActive = ({ active }: StyledTabButtonProps) => {
+export const getActive = ({ active }: StyledTabButtonProps) => {
   switch (active) {
     case 'active': {
       return css`
@@ -44,4 +29,12 @@ export const StyledTabButton = styled.button<StyledTabButtonProps>`
   border: none;
   font-weight: 600;
   ${(props) => getActive(props)}
+`;
+
+export const StyledSelectTheme = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 28rem;
+  margin-top: 7rem;
 `;

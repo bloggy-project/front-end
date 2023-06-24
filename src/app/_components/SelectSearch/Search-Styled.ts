@@ -29,7 +29,7 @@ const getIsOpened = ({ isopen }: StyledSearchInputProps) => {
   }
 };
 
-export const StyledSearchContainer = styled.div`
+export const StyledSearch = styled.div`
   display: flex;
   width: 39rem;
   align-items: center;
@@ -43,7 +43,7 @@ export const StyledSearchButton = styled.button`
   background-color: transparent;
   border-color: transparent;
   height: 1.9rem;
-  z-index: 30;
+  z-index: 8;
 
   .SearchButton {
     border-radius: 100%;
