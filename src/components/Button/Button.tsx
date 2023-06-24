@@ -5,7 +5,7 @@ type ButtonProps = {
   type?: 'button' | 'submit' | 'reset' | undefined;
   color: string;
   hover: 'none' | 'opacity';
-  size: 'sm' | 'md' | 'lg' | 'full';
+  size: 'sm' | 'md' | 'lg' | 'modal' | 'modal-sm';
   content: string;
 };
 

@@ -6,6 +6,7 @@ export const Palette = {
   TWISTED1: '#E19F20', //주황색
   TWISTED2: '#FFEDCB', //매우 연한 주황색
   SWITCH: '#E19F20', //진한 주황색
+  NATURAL: '#7094BC', //잿빛
 };
 
 export const Effect = {

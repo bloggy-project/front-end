@@ -6,7 +6,7 @@ export const StyledFormContainer = styled.div`
   margin-top: 2rem;
 `;
 
-export const StyledLoginForm = styled.form`
+export const StyledForm = styled.form`
   display: flex;
   flex-direction: column;
   & > button {
@@ -23,10 +23,20 @@ export const StyledInput = styled.input`
   outline: none;
 
   &:focus {
-    border-color: ${Palette.SPOT1};
+    border-color: ${Palette.TWISTED1};
     border-width: 1.5px;
     outline: none;
   }
+`;
+
+export const StyledMinInput = styled(StyledInput)`
+  width: 75%;
+`;
+
+export const StyledInputContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 `;
 
 export const StyledErrMsg = styled.p`
