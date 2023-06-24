@@ -30,6 +30,6 @@
     "jest.config.ts",
     ".next/types/**/*.ts",
     "next.config.js"
-  ],
+, "src/mocks/api/authApi.ts"  ],
   "exclude": ["node_modules"]
 }
