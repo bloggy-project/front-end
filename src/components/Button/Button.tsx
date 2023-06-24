@@ -1,16 +1,30 @@
 import { StyledButton } from '@/components/Button/Button-Styled';
 
 type ButtonProps = {
-  onClick: () => void;
+  onClick?: () => void;
+  type?: 'button' | 'submit' | 'reset' | undefined;
   color: string;
   hover: 'none' | 'opacity';
-  size: 'sm' | 'md' | 'lg';
+  size: 'sm' | 'md' | 'lg' | 'full';
   content: string;
 };
 
-const Button = ({ onClick, color, hover, size, content }: ButtonProps) => {
+const Button = ({
+  onClick,
+  type,
+  color,
+  hover,
+  size,
+  content,
+}: ButtonProps) => {
   return (
-    <StyledButton onClick={onClick} color={color} hover={hover} size={size}>
+    <StyledButton
+      onClick={onClick}
+      type={type}
+      color={color}
+      hover={hover}
+      size={size}
+    >
       {content}
     </StyledButton>
   );

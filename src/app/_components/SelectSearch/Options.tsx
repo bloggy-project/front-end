@@ -1,5 +1,5 @@
 'use client';
-import { OPTIONS as options } from '@/assets/keyword';
+import { Options as options } from '@/assets/keyword';
 import { forwardRef, MouseEvent } from 'react';
 import { StyledOptions, StyledOptionLi } from './Options-Styled';
 import selectKeywordStore from '@/store/selectKeywordStore';

@@ -1,4 +1,4 @@
-import { OPTIONTHEME as theme } from '@/assets/keyword';
+import { OptionTheme as theme } from '@/assets/keyword';
 import { useState, memo, useRef } from 'react';
 import { StyledOptionTheme, StyledThemeContainer } from './OptionTheme-Styled';
 import {

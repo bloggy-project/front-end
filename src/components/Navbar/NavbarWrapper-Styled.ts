@@ -1,9 +1,9 @@
-import { LAYOUT } from '@/assets/size';
+import { Layout } from '@/assets/size';
 import styled from 'styled-components';
 
 export const NavbarWrapper = styled.nav`
   padding-top: 1.7rem;
-  width: ${LAYOUT.WIDTH};
+  width: ${Layout.WIDTH};
   display: flex;
   align-items: center;
   justify-content: space-between;

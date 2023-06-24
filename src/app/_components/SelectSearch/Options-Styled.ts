@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { EFFECT as effect } from '@/assets/color';
+import { Effect } from '@/assets/color';
 
 type StyledOptionLiProps = {
   $selected: boolean;
@@ -9,7 +9,7 @@ const getSelected = ({ $selected }: StyledOptionLiProps) => {
   switch ($selected) {
     case true: {
       return css`
-        color: ${effect.SELECTED};
+        color: ${Effect.SELECTED};
         font-weight: 700;
       `;
     }
@@ -28,8 +28,8 @@ export const StyledOptions = styled.div`
   top: 3rem;
   width: 10rem;
   border-radius: 5%;
-  background-color: ${effect.BACK};
-  box-shadow: 0.1rem 0.1rem 0.1rem 0.1rem ${effect.SHADOW};
+  background-color: ${Effect.BACK};
+  box-shadow: 0.1rem 0.1rem 0.1rem 0.1rem ${Effect.SHADOW};
   cursor: pointer;
   z-index: 88;
   :last-child {
@@ -45,7 +45,7 @@ export const StyledOptionLi = styled.li<StyledOptionLiProps>`
 
   font-size: 1.4rem;
   &:hover {
-    background-color: ${effect.HOVER_BACK};
+    background-color: ${Effect.HOVER_BACK};
     color: white;
     font-weight: 700;
   }
