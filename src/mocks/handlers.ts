@@ -1,3 +1,4 @@
-import searchResultHandler from './api/searchResult';
+import authApi from './api/authApi';
+import pageApi from './api/pagetApi';
 
-export const handlers = [...searchResultHandler];
+export const handlers = [...authApi, ...pageApi];

@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { TABS as tabs, OPTIONS as options } from '@/assets/keyword';
+import { Tabs, Options } from '@/assets/keyword';
 
 type KeywordState = {
   theme: string;
@@ -11,8 +11,8 @@ type KeywordState = {
 };
 
 const selectKeywordStore = create<KeywordState>()((set) => ({
-  theme: tabs[0].label,
-  option: options[0].value,
+  theme: Tabs[0].label,
+  option: Options[0].value,
   searched: '',
   setTheme: (value) =>
     set({
