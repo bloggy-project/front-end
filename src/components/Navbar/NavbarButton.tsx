@@ -1,20 +1,20 @@
 import Button from '@/components/Button/Button';
 import { Palette } from '@/assets/color';
 import Modal from '@/components/Modal/Modal';
-import useToggle from '@/hooks/useToggle';
+import modalStore from '@/store/modalStore';
 
 const NavbarButton = () => {
-  const { isOpen, onChangeOpen } = useToggle();
+  const setToggleModal = modalStore((state) => state.setToggleModal);
   return (
     <>
       <Button
-        onClick={onChangeOpen}
+        onClick={setToggleModal}
         hover={'opacity'}
         size={'sm'}
         color={Palette.SPOT1}
         content={'로그인 / 회원가입'}
       />
-      <Modal isOpen={isOpen} onChangeOpen={onChangeOpen} />
+      <Modal />
     </>
   );
 };

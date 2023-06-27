@@ -10,6 +10,8 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import { Palette } from '@/assets/color';
 import { onLogin } from '@/lib/api/auth';
+import { loginProps } from '@/lib/types/auth';
+import modalStore from '@/store/modalStore';
 
 const Login = () => {
   const {
@@ -21,10 +23,16 @@ const Login = () => {
     resolver: yupResolver(loginSchema),
     mode: 'onChange',
   });
+  const setToggleModal = modalStore((state) => state.setToggleModal);
+  const submitLogin = async ({ email, password }: loginProps) => {
+    await onLogin(email, password);
+    reset();
+    setToggleModal();
+  };
 
   return (
     <StyledFormContainer>
-      <StyledForm onSubmit={handleSubmit(onLogin)}>
+      <StyledForm onSubmit={handleSubmit(submitLogin)}>
         <StyledInput
           id="email"
           placeholder="이메일을 입력해 주세요"

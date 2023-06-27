@@ -7,7 +7,7 @@ export type StyledTabButtonProps = {
 
 const changeModalWidth = keyframes`
 from{
-  width: 19rem;
+  width: 22.5rem;
 }to{
   width: 40rem;
 }
@@ -50,6 +50,12 @@ export const StyledTabButtonContainer = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
-  justify-content: start;
+  justify-content: space-between;
   margin-top: 0;
+  & > svg {
+    cursor: pointer;
+    font-size: 2rem;
+    color: gray;
+    margin-right: 1.5rem;
+  }
 `;
