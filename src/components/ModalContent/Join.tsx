@@ -7,11 +7,11 @@ import {
   StyledErrMsg,
 } from './Form-Styled';
 import { joinSchema } from '@/lib/validation/schame';
-import { joinProps } from '@/lib/types/auth';
 import Button from '../Button/Button';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import { Palette } from '@/assets/color';
+import { onJoin } from '@/lib/api/auth';
 
 const Join = () => {
   const {
@@ -24,11 +24,6 @@ const Join = () => {
     mode: 'onChange',
   });
 
-  const onJoin = ({ email, pwd, nickname }: joinProps) => {
-    console.log({ email: email, pwd: pwd, nickname: nickname });
-    reset();
-  };
-
   return (
     <StyledFormContainer>
       <StyledForm onSubmit={handleSubmit(onJoin)}>
@@ -40,9 +35,9 @@ const Join = () => {
         <StyledInput
           type="password"
           placeholder="비밀번호를 입력해 주세요"
-          {...register('pwd')}
+          {...register('password')}
         />
-        <StyledErrMsg>{errors.pwd?.message}</StyledErrMsg>
+        <StyledErrMsg>{errors.password?.message}</StyledErrMsg>
         <StyledInput
           type="password"
           placeholder="비밀번호를 다시 한 번 입력해 주세요"
@@ -52,7 +47,7 @@ const Join = () => {
         <StyledInputContainer>
           <StyledMinInput
             placeholder="닉네임을 입력해 주세요"
-            {...register('nickname')}
+            {...register('name')}
           />
           <Button
             type="button"
@@ -62,7 +57,7 @@ const Join = () => {
             content={'중복 확인'}
           />
         </StyledInputContainer>
-        <StyledErrMsg>{errors.nickname?.message}</StyledErrMsg>
+        <StyledErrMsg>{errors.name?.message}</StyledErrMsg>
         <Button
           type="submit"
           color={Palette.SPOT1}
