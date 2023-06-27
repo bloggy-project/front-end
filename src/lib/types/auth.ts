@@ -1,9 +1,9 @@
 export interface loginProps {
   email: string;
-  pwd: string;
+  password: string;
 }
 
 export interface joinProps extends loginProps {
   pwdConfirm: string;
-  nickname: string;
+  name: string;
 }
