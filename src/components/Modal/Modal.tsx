@@ -2,15 +2,13 @@ import ModalWrapper from './ModalWrapper';
 import { StyledModal } from './Modal-Styled';
 import { useEffect } from 'react';
 import AuthTheme from '../ModalContent/ModalContent';
+import modalStore from '@/store/modalStore';
 
-type ModalProps = {
-  isOpen: boolean;
-  onChangeOpen: () => void;
-};
+const Modal = () => {
+  const isOpenModal = modalStore((state) => state.isOpenModal);
 
-const Modal = ({ isOpen, onChangeOpen }: ModalProps) => {
   useEffect(() => {
-    if (isOpen) {
+    if (isOpenModal) {
       const openModal = () => {
         document.body.style.overflow = 'hidden'; // Disable body scrolling
       };
@@ -21,20 +19,12 @@ const Modal = ({ isOpen, onChangeOpen }: ModalProps) => {
       };
       closeModal();
     }
-  }, [isOpen]);
-
-  const onlyToggledInWrapper = (e: React.MouseEvent) => {
-    if (e.target !== e.currentTarget) {
-      return;
-    } else {
-      onChangeOpen();
-    }
-  };
+  }, [isOpenModal]);
 
   return (
     <>
-      {isOpen && (
-        <ModalWrapper onClick={onlyToggledInWrapper}>
+      {isOpenModal && (
+        <ModalWrapper>
           <StyledModal data-testid="modal">
             <AuthTheme />
           </StyledModal>

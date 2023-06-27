@@ -18,7 +18,6 @@ const Join = () => {
     register,
     handleSubmit,
     formState: { errors },
-    reset,
   } = useForm({
     resolver: yupResolver(joinSchema),
     mode: 'onChange',

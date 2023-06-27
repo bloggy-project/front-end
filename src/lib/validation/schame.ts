@@ -38,7 +38,7 @@ export const joinSchema = yup.object().shape({
     ), //기존   ...loginSchema.fields, 를 통한 복사 방법은 useForm에서 인식이 안됨
   pwdConfirm: yup
     .string()
-    .oneOf([yup.ref('pwd')], '비밀번호가 일치하지 않습니다')
+    .oneOf([yup.ref('password')], '비밀번호가 일치하지 않습니다')
     .required('비밀번호를 다시 한 번 입력해 주세요'),
   name: yup
     .string()
