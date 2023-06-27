@@ -1,16 +1,15 @@
 import { loginSchema } from '@/lib/validation/schame';
-import { loginProps } from '@/lib/types/auth';
 import {
   StyledFormContainer,
-  StyledLoginForm,
+  StyledForm,
   StyledInput,
   StyledErrMsg,
-} from './Login-Styled';
+} from './Form-Styled';
 import Button from '../Button/Button';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import { Palette } from '@/assets/color';
-import axios from 'axios';
+import { onLogin } from '@/lib/api/auth';
 
 const Login = () => {
   const {
@@ -23,14 +22,9 @@ const Login = () => {
     mode: 'onChange',
   });
 
-  const onLogin = async ({ email, pwd }: loginProps) => {
-    console.log({ email: email, pwd: pwd });
-    reset();
-  };
-
   return (
-    <StyledFormContainer onSubmit={handleSubmit(onLogin)}>
-      <StyledLoginForm>
+    <StyledFormContainer>
+      <StyledForm onSubmit={handleSubmit(onLogin)}>
         <StyledInput
           id="email"
           placeholder="이메일을 입력해 주세요"
@@ -42,17 +36,17 @@ const Login = () => {
           type="password"
           id="pwd"
           placeholder="비밀번호를 입력해 주세요"
-          {...register('pwd')}
+          {...register('password')}
         />
-        <StyledErrMsg>{errors.pwd?.message}</StyledErrMsg>
+        <StyledErrMsg>{errors.password?.message}</StyledErrMsg>
         <Button
           type="submit"
-          color={Palette.TWISTED1}
+          color={Palette.SPOT1}
           hover={'opacity'}
-          size={'full'}
+          size={'modal'}
           content={'로그인'}
         />
-      </StyledLoginForm>
+      </StyledForm>
     </StyledFormContainer>
   );
 };
