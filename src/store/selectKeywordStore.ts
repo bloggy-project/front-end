@@ -1,11 +1,13 @@
 import { create } from 'zustand';
-import { Tabs, Options } from '@/assets/keyword';
+import { Tabs, Options, OptionTheme } from '@/assets/keyword';
 
 type KeywordState = {
   theme: string;
   option: string;
+  optionTheme: string;
   searched: string;
   setTheme: (value: string) => void;
+  setOptionTheme: (value: string) => void;
   setOption: (value: string) => void;
   setSearched: (value: string) => void;
 };
@@ -13,10 +15,15 @@ type KeywordState = {
 const selectKeywordStore = create<KeywordState>()((set) => ({
   theme: Tabs[0].label,
   option: Options[0].value,
+  optionTheme: OptionTheme[0].name,
   searched: '',
   setTheme: (value) =>
     set({
       theme: value,
+    }),
+  setOptionTheme: (value) =>
+    set({
+      option: value,
     }),
   setOption: (value) =>
     set({

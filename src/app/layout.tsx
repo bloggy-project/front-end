@@ -3,6 +3,7 @@ import Navbar from '@/components/Navbar/Naverbar';
 import { StyledLayout } from '@/components/Layout/Layout-Styled';
 import './globals.css';
 import StyledComponentsRegistry from '../lib/registry';
+import ReactQueryProvider from './ReactQueryProvider';
 // import { Inter } from 'next/font/google';
 // const inter = Inter({ subsets: ['latin'] });
 
@@ -20,8 +21,10 @@ const RootLayout = ({ children }: LayoutProps) => {
     <html>
       <StyledComponentsRegistry>
         <StyledLayout>
-          <Navbar />
-          {children}
+          <ReactQueryProvider>
+            <Navbar />
+            {children}
+          </ReactQueryProvider>
         </StyledLayout>
       </StyledComponentsRegistry>
     </html>
