@@ -9,18 +9,22 @@ import {
 } from 'react-icons/ai';
 import useToggle from '@/hooks/useToggle';
 import Options from './Options';
+import selectKeywordStore from '@/store/selectKeywordStore';
 
 const OptionTheme = () => {
   const optionRef = useRef<HTMLDivElement>(null);
   const { isOpen, onChangeOpen, closeOnly } = useToggle(optionRef);
   const [active, setActive] = useState(theme[0].name);
+  const setOptionTheme = selectKeywordStore((state) => state.setOptionTheme);
 
   const onChangeActive = () => {
     if (active === theme[0].name) {
       setActive(theme[1].name);
+      setOptionTheme(theme[1].name);
       closeOnly();
     } else {
       setActive(theme[0].name);
+      setOptionTheme(theme[0].name);
     }
   };
 
