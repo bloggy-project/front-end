@@ -17,7 +17,7 @@ const Card = ({ optionTheme, option }: CardProps) => {
     hasNextPage,
     isLoading,
     isFetchingNextPage,
-  } = useGetUserProfileList();
+  } = useGetUserProfileList(optionTheme, option);
 
   useEffect(() => {
     if (inView) {
