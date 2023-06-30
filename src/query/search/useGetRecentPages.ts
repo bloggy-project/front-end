@@ -1,19 +1,46 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
-import { getRecentPages } from '../../lib/api/search/recent';
-import { GetRecentPages } from '../key';
+import { getRecentPages, getPopularPages } from '../../lib/api/search';
+import { GetRecentPages, GetPopularPages } from '../key';
 import { Pages } from '@/lib/types/pages';
+import { OptionTheme } from '@/assets/keyword';
 
-const useGetUserProfileList = () => {
+const useGetUserProfileList = (optionTheme: string, option: string) => {
   const { data, fetchNextPage, hasNextPage, isLoading, isFetchingNextPage } =
     useInfiniteQuery({
-      queryKey: [GetRecentPages],
-      queryFn: async ({ pageParam = null }) => getRecentPages(pageParam),
-      getNextPageParam: (lastpage: Pages) => {
-        const lastItem = lastpage.content[lastpage.content.length - 1];
-        const { postId } = lastItem;
-        if (!lastpage.last) return postId;
-        else return undefined;
-      },
+      queryKey:
+        optionTheme === OptionTheme[0].name
+          ? [GetRecentPages]
+          : [GetPopularPages],
+      queryFn:
+        optionTheme === OptionTheme[0].name
+          ? async ({ pageParam = null }) => getRecentPages(pageParam)
+          : async ({
+              pageParam = {
+                lastId: null,
+                favoriteCount: 0,
+                date: option,
+              },
+            }) => getPopularPages(pageParam),
+      getNextPageParam:
+        optionTheme === OptionTheme[0].name
+          ? (lastpage: Pages) => {
+              const lastItem = lastpage.content[lastpage.content.length - 1];
+              const { postId } = lastItem;
+              if (!lastpage.last) return postId;
+              else return false;
+            }
+          : (lastpage: Pages) => {
+              const lastItem = lastpage.content[lastpage.content.length - 1];
+              const { postId, favoriteCount } = lastItem;
+              if (!lastpage.last)
+                return {
+                  lastId: postId,
+                  favoriteCount: favoriteCount,
+                  date: option,
+                };
+              else return false;
+            },
+
       staleTime: 1000 * 60,
       cacheTime: 1000 * 60 * 5,
       retry: false,

@@ -18,15 +18,12 @@ type ContentProps = {
 
 const Content = ({ data }: ContentProps) => {
   const createdDate = data.createdAt.split('T')[0];
-  // const year = data.createdAt.getFullYear();
-  // const month = data.createdAt.getMonth();
-  // const day= data.createdAt.getDay();
+
   return (
     <StyledContent>
       <StyledImgContainer>
-        <img src={data.thumbnail} alt="test" />
+        <Image src={data.thumbnail} alt={data.title} fill />
       </StyledImgContainer>
-      <span>{data.postId}</span>
       <StyledDetails>
         <StyledDetailsH3>{data.title}</StyledDetailsH3>
         <StyledDetailsP>{data.content}</StyledDetailsP>
