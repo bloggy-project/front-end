@@ -20,7 +20,8 @@ export const StyledContent = styled.article`
 
 export const StyledImgContainer = styled.div`
   width: 100%;
-  height: 20rem;
+  height: 25rem;
+
   position: relative;
   & > img {
     position: absolute;
@@ -28,7 +29,7 @@ export const StyledImgContainer = styled.div`
     height: 100%;
   }
   @media screen and (max-width: 986px) {
-    height: 25rem;
+    height: 27rem;
   }
   @media screen and (max-width: 768px) {
     height: 30rem;

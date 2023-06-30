@@ -1,4 +1,5 @@
 'use client';
+
 import { StyledMain } from './Main-Styled';
 import Card from '../Card/Card';
 import { Tabs } from '@/assets/keyword';
