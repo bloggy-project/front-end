@@ -23,7 +23,7 @@ const selectKeywordStore = create<KeywordState>()((set) => ({
     }),
   setOptionTheme: (value) =>
     set({
-      option: value,
+      optionTheme: value,
     }),
   setOption: (value) =>
     set({

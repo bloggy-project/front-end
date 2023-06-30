@@ -21,7 +21,7 @@ export const Auth_Tabs = [
 ];
 
 export const Options = [
-  { name: '오늘', value: 'day' },
+  { name: '오늘', value: 'today' },
   { name: '이번 주', value: 'week' },
   { name: '이번 달', value: 'month' },
   { name: '올해', value: 'year' },
