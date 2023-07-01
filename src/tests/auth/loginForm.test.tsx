@@ -8,8 +8,8 @@ jest.mock('axios');
 describe('LoinForm Test', () => {
   const setup = () => {
     const utils = render(<Login />);
-    const emailInput = screen.getByPlaceholderText('Email', { exact: false });
-    const passwrodInput = screen.getByPlaceholderText('Password', {
+    const emailInput = screen.getByPlaceholderText('이메일', { exact: false });
+    const passwrodInput = screen.getByPlaceholderText('비밀번호', {
       exact: false,
     });
     const submitBtn = screen.getByRole('button', { name: '로그인' });
@@ -28,11 +28,17 @@ describe('LoinForm Test', () => {
     expect(screen.getByDisplayValue('pass')).toBeInTheDocument();
   });
   it('submit success', async () => {
-    console.log = jest.fn();
     const { emailInput, passwrodInput, submitBtn } = setup();
-    await UserEvent.type(emailInput, 'test');
-    await UserEvent.type(passwrodInput, 'pass');
+    await UserEvent.type(emailInput, 'test12@test.com');
+    await UserEvent.type(passwrodInput, 'teststest!');
     UserEvent.click(submitBtn);
     expect(axios.post).toHaveBeenCalled();
+  });
+  it('submit failed', async () => {
+    const { emailInput, passwrodInput, submitBtn } = setup();
+    await UserEvent.type(emailInput, 'test1');
+    await UserEvent.type(passwrodInput, 'teststest!');
+    UserEvent.click(submitBtn);
+    expect(axios.post).not.toHaveBeenCalled();
   });
 });
