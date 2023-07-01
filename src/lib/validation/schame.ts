@@ -42,7 +42,13 @@ export const joinSchema = yup.object().shape({
     .required('비밀번호를 다시 한 번 입력해 주세요'),
   name: yup
     .string()
-    .required('닉네임을 확인해 주세요.')
+    .required('닉네임을 입력해 주세요.')
     .min(2, '2자 이상으로 입력해 주세요')
     .max(12, '12자 이하로 입력해 주세요.'),
 });
+
+export const nameSchema = yup
+  .string()
+  .required('닉네임을 입력해 주세요.')
+  .min(2, '2자 이상으로 입력해 주세요')
+  .max(12, '12자 이하로 입력해 주세요.');
