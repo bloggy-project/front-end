@@ -1,12 +1,13 @@
 import { StyledButton } from '@/components/Button/Button-Styled';
 
 type ButtonProps = {
-  onClick?: () => void;
+  onClick?: any;
   type?: 'button' | 'submit' | 'reset' | undefined;
   color: string;
   hover: 'none' | 'opacity';
   size: 'sm' | 'md' | 'lg' | 'modal' | 'modal-sm';
   content: string;
+  disabled?: boolean;
 };
 
 const Button = ({
@@ -16,6 +17,7 @@ const Button = ({
   hover,
   size,
   content,
+  disabled,
 }: ButtonProps) => {
   return (
     <StyledButton
@@ -24,6 +26,7 @@ const Button = ({
       color={color}
       hover={hover}
       size={size}
+      disabled={disabled}
     >
       {content}
     </StyledButton>
