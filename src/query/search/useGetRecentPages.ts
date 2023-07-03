@@ -25,13 +25,14 @@ const useGetUserProfileList = (optionTheme: string, option: string) => {
         optionTheme === OptionTheme[0].name
           ? (lastpage: Pages) => {
               const lastItem = lastpage.content[lastpage.content.length - 1];
-              const { postId } = lastItem;
-              if (!lastpage.last) return postId;
+              const postId = lastItem?.postId ?? null;
+              if (!lastpage?.last) return postId;
               else return false;
             }
           : (lastpage: Pages) => {
               const lastItem = lastpage.content[lastpage.content.length - 1];
-              const { postId, favoriteCount } = lastItem;
+              const postId = lastItem?.postId ?? null;
+              const favoriteCount = lastItem?.favoriteCount ?? null;
               if (!lastpage.last)
                 return {
                   lastId: postId,
