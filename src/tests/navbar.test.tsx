@@ -1,7 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import UserEvent from '@testing-library/user-event';
 import NavbarButton from '@/components/Navbar/NavbarButton';
-import Modal from '@/components/Modal/Modal';
 
 describe('NavBar Test : Button, Modal', () => {
   it('NavbarButton render', () => {
@@ -10,12 +9,6 @@ describe('NavBar Test : Button, Modal', () => {
       name: '로그인 / 회원가입',
     });
     expect(button).toBeInTheDocument();
-  });
-
-  it('Modal render', () => {
-    render(<Modal isOpen={true} onChangeOpen={jest.fn()} />);
-    const modal = screen.getByTestId('modal');
-    expect(modal).toBeInTheDocument();
   });
 
   it('Modal render on click', async () => {

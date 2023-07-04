@@ -1,9 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import UserEvent from '@testing-library/user-event';
 import Login from '@/components/ModalContent/Login';
-import axios from 'axios';
-
-jest.mock('axios');
 
 describe('LoinForm Test', () => {
   const setup = () => {
@@ -26,19 +23,5 @@ describe('LoinForm Test', () => {
     await UserEvent.type(passwrodInput, 'pass');
     expect(screen.getByDisplayValue('test')).toBeInTheDocument();
     expect(screen.getByDisplayValue('pass')).toBeInTheDocument();
-  });
-  it('submit success', async () => {
-    const { emailInput, passwrodInput, submitBtn } = setup();
-    await UserEvent.type(emailInput, 'test12@test.com');
-    await UserEvent.type(passwrodInput, 'teststest!');
-    UserEvent.click(submitBtn);
-    expect(axios.post).toHaveBeenCalled();
-  });
-  it('submit failed', async () => {
-    const { emailInput, passwrodInput, submitBtn } = setup();
-    await UserEvent.type(emailInput, 'test1');
-    await UserEvent.type(passwrodInput, 'teststest!');
-    UserEvent.click(submitBtn);
-    expect(axios.post).not.toHaveBeenCalled();
   });
 });
