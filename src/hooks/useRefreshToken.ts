@@ -1,11 +1,11 @@
-import { useEffect, useCallback, useState } from 'react';
+import { useEffect, useCallback } from 'react';
 import authStore from '@/store/authStore';
 import { shallow } from 'zustand/shallow';
 import { apiPrivate } from '@/lib/api/config';
 import { AxiosError } from 'axios';
 import { getTokenByRefresh } from '@/lib/api/token';
 import onTest from '@/lib/api/testApi';
-import { getLocalStorage } from '@/lib/handler/handleUserInfo';
+import { RuleToken } from '@/assets/status';
 
 const useRefreshToken = () => {
   const { accessToken, setAccessToken, setUserInfo } = authStore(
@@ -28,7 +28,8 @@ const useRefreshToken = () => {
         setUserInfo(userInfo);
       }
     } catch (err) {
-      alert('로그인을 다시 시도해주세요');
+      //액세스 토큰 발급 실패에 따라 상태 업데이트
+      setAccessToken(RuleToken.No_token);
     }
   }, []);
 
@@ -55,7 +56,6 @@ const useRefreshToken = () => {
         return response;
       },
       async (error: AxiosError) => {
-        //나중에 status는 토큰 에러 관련 번호 알아내서 재정의
         if ((error?.response?.status as number) >= 400) {
           try {
             newAccessToken = await getTokenByRefresh();
@@ -68,15 +68,18 @@ const useRefreshToken = () => {
       },
     );
 
-    //새로고침 시 localStorage에 'userinfo'가 있으면 로그인 유지 중인 것으로 간주
     //액세스 토큰 재발급 후 user정보 업데이트
-    resetLoginedUserInfo();
+    if (!accessToken) {
+      resetLoginedUserInfo();
+    }
 
     return () => {
       apiPrivate.interceptors.request.eject(requestIntercept);
       apiPrivate.interceptors.request.eject(responseIntercept);
     };
-  }, [getLocalStorage('userinfo')]);
+  }, [accessToken]);
+
+  return accessToken;
 };
 
 export default useRefreshToken;

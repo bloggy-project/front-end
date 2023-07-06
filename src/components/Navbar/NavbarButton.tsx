@@ -1,22 +1,19 @@
-import Button from '@/components/Button/Button';
-import { Palette } from '@/assets/color';
-import Modal from '@/components/Modal/Modal';
-import modalStore from '@/store/modalStore';
+import LoginedButton from '../User/LoginedButton';
+import { StatusToken } from '@/assets/status';
+import AuthButton from '../User/AuthButton';
 
-const NavbarButton = () => {
-  const setToggleModal = modalStore((state) => state.setToggleModal);
-  return (
-    <>
-      <Button
-        onClick={setToggleModal}
-        hover={'opacity'}
-        size={'sm'}
-        color={Palette.SPOT1}
-        content={'로그인 / 회원가입'}
-      />
-      <Modal />
-    </>
-  );
+type NavbarButtonProps = {
+  token: string | null;
+};
+
+const NavbarButton = ({ token }: NavbarButtonProps) => {
+  if (token === StatusToken.Initial) {
+    return null;
+  } else if (token === StatusToken.No_token) {
+    return <AuthButton />;
+  } else {
+    return <LoginedButton />;
+  }
 };
 
 export default NavbarButton;
