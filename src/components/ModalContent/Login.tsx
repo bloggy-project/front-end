@@ -12,6 +12,8 @@ import { Palette } from '@/assets/color';
 import { onLogin } from '@/lib/api/auth';
 import { loginProps } from '@/lib/types/auth';
 import modalStore from '@/store/modalStore';
+import authStore from '@/store/authStore';
+import { shallow } from 'zustand/shallow';
 
 const Login = () => {
   const {
@@ -24,15 +26,33 @@ const Login = () => {
     mode: 'onChange',
   });
   const setToggleModal = modalStore((state) => state.setToggleModal);
+  const { setUserInfo, setAccessToken } = authStore(
+    (state) => ({
+      setAccessToken: state.setAccessToken,
+      setUserInfo: state.setUserInfo,
+    }),
+    shallow,
+  );
   const submitLogin = async ({ email, password }: loginProps) => {
-    await onLogin(email, password);
+    const {
+      thumbnail,
+      name,
+      email: userEmail,
+    } = await onLogin(email, password);
+
+    const userInfo = { thumbnail, name, email: userEmail };
+    setUserInfo(userInfo);
     reset();
     setToggleModal();
   };
 
+  const submitCancel = () => {
+    alert('로그인에 실패하였습니다. 다시 한 번 확인해 주세요.');
+  };
+
   return (
     <StyledFormContainer>
-      <StyledForm onSubmit={handleSubmit(submitLogin)}>
+      <StyledForm onSubmit={handleSubmit(submitLogin, submitCancel)}>
         <StyledInput
           id="email"
           placeholder="이메일을 입력해 주세요"
