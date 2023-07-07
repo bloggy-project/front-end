@@ -1,6 +1,6 @@
-import LoginedButton from '../User/LoginedButton';
+import LoginedUserButton from '../NavbarContent/LoginedUserButton';
 import { StatusToken } from '@/assets/status';
-import AuthButton from '../User/AuthButton';
+import AuthButton from '../NavbarContent/AuthButton';
 
 type NavbarButtonProps = {
   token: string | null;
@@ -12,7 +12,7 @@ const NavbarButton = ({ token }: NavbarButtonProps) => {
   } else if (token === StatusToken.No_token) {
     return <AuthButton />;
   } else {
-    return <LoginedButton />;
+    return <LoginedUserButton />;
   }
 };
 

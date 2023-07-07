@@ -18,6 +18,13 @@ const nextConfig = {
       },
     ];
   },
+  images: {
+    domains: [
+      'thumb.mt.co.kr',
+      'img4.daumcdn.net',
+      'dzbnjlxurlvs4.cloudfront.net',
+    ],
+  },
 };
 
 module.exports = nextConfig;

@@ -2,6 +2,7 @@ import { Layout } from '@/assets/size';
 import styled from 'styled-components';
 
 export const NavbarWrapper = styled.nav`
+  position: relative;
   padding-top: 1.7rem;
   width: ${Layout.WIDTH};
   display: flex;
