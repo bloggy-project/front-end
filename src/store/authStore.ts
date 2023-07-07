@@ -1,20 +1,17 @@
 import { StatusToken } from '@/assets/status';
-import { setLocalStorage } from '@/lib/handler/handleUserInfo';
+import MyLocalStorage from '@/lib/handler/handleLocalStorage';
+import { UserInfo } from '@/lib/types/auth';
 import { create } from 'zustand';
 import { devtools } from 'zustand/middleware';
 
-type userInfo = {
-  thumbnail: null | string;
-  name: string;
-  email: string;
-};
-
 type authState = {
   accessToken: string | null;
-  userInfo: userInfo;
+  userInfo: UserInfo;
   setAccessToken: (value: string) => void;
-  setUserInfo: (value: userInfo) => void;
+  setUserInfo: (value: UserInfo) => void;
 };
+
+const storageName = 'userinfo';
 
 const authStore = create<authState>()(
   devtools((set) => ({
@@ -32,7 +29,7 @@ const authStore = create<authState>()(
       set({
         userInfo: value,
       }),
-      setLocalStorage<userInfo>(value, 'userinfo')
+      new MyLocalStorage<UserInfo>(storageName).set(value)
     ),
   })),
 );
