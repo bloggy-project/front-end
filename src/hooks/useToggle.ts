@@ -17,6 +17,10 @@ const useToggle = (ref?: RefObject<HTMLElement>) => {
     setIsOpen(false);
   };
 
+  const onpenOnly = () => {
+    setIsOpen(true);
+  };
+
   useEffect(() => {
     if (ref) {
       document.addEventListener('mousedown', closeByOutside);
@@ -30,6 +34,7 @@ const useToggle = (ref?: RefObject<HTMLElement>) => {
     isOpen,
     onChangeOpen,
     closeOnly,
+    onpenOnly,
   };
 };
 

@@ -4,11 +4,10 @@ import {
 } from '@/components/NavbarContent/StyledUserMenu';
 import { useLocalStorage } from '@/hooks/useLocalStorage';
 import { UserInfo } from '@/lib/types/auth';
-import { forwardRef } from 'react';
 
 const StorageName = 'userinfo';
 
-const UserMenu = forwardRef<HTMLDivElement>(function UserMenu(_props, ref) {
+const UserMenu = () => {
   const storageData = useLocalStorage<UserInfo>(StorageName);
   const menu = [
     { name: '내 블로그', value: storageData?.name },
@@ -17,7 +16,7 @@ const UserMenu = forwardRef<HTMLDivElement>(function UserMenu(_props, ref) {
   ];
 
   return (
-    <StyledMenu ref={ref}>
+    <StyledMenu>
       <ul>
         {menu.map((item) => (
           <StyledMenuLi
@@ -30,6 +29,6 @@ const UserMenu = forwardRef<HTMLDivElement>(function UserMenu(_props, ref) {
       </ul>
     </StyledMenu>
   );
-});
+};
 
 export default UserMenu;
