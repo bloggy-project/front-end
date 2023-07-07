@@ -1,8 +1,9 @@
 import useGetUserProfileList from '@/query/search/useGetRecentPages';
 import { StyledCard } from './Card-Styled';
-import Content from './Content';
+import Content from '../CardContent/Content';
 import { useInView } from 'react-intersection-observer';
 import { useEffect } from 'react';
+import EmptyContent from '@/app/_components/CardContent/EmptyContent';
 
 type CardProps = {
   optionTheme: string;
@@ -19,11 +20,17 @@ const Card = ({ optionTheme, option }: CardProps) => {
     isFetchingNextPage,
   } = useGetUserProfileList(optionTheme, option);
 
+  const hasNoContent = pageDatas?.some((data) => data.content.length < 1);
+
   useEffect(() => {
     if (inView) {
       fetchNextPage();
     }
   }, [inView]);
+
+  if (hasNoContent) {
+    return <EmptyContent />;
+  }
 
   return (
     <>

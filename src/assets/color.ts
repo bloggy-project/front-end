@@ -7,6 +7,7 @@ export const Palette = {
   TWISTED2: '#FFEDCB', //매우 연한 주황색
   SWITCH: '#E19F20', //진한 주황색
   NATURAL: '#7094BC', //잿빛
+  SPOT2_TEXT: '#344A53',
 };
 
 export const Effect = {
