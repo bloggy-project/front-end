@@ -3,15 +3,19 @@ import { useRef } from 'react';
 import UserThumbnail from './UserThumbnail';
 import useToggle from '@/hooks/useToggle';
 import UserMenu from './UserMenu';
+import { AiOutlineMenu } from 'react-icons/ai';
+import { StyledLoginedUserButton } from './StyledLoginedUserButton';
 
 const LoginedUserButton = () => {
   const menuRef = useRef<HTMLDivElement>(null);
   const { isOpen, onChangeOpen } = useToggle(menuRef);
+
   return (
-    <>
-      <UserThumbnail thumbnail={''} name={''} onClick={onChangeOpen} />
-      {isOpen && <UserMenu ref={menuRef} />}
-    </>
+    <StyledLoginedUserButton ref={menuRef} onClick={onChangeOpen}>
+      <UserThumbnail thumbnail={''} name={''} />
+      <AiOutlineMenu />
+      {isOpen && <UserMenu />}
+    </StyledLoginedUserButton>
   );
 };
 

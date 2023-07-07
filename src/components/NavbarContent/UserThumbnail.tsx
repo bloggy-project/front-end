@@ -4,12 +4,11 @@ import { StyledThumbnailContainer } from './StyledUserThumbnail';
 type UserThumbnailProps = {
   thumbnail: string;
   name: string;
-  onClick: () => void;
 };
 
-const UserThumbnail = ({ thumbnail, name, onClick }: UserThumbnailProps) => {
+const UserThumbnail = ({ thumbnail, name }: UserThumbnailProps) => {
   return (
-    <StyledThumbnailContainer onClick={onClick}>
+    <StyledThumbnailContainer>
       <Image
         src={
           'https://dzbnjlxurlvs4.cloudfront.net/thumb/%EC%86%90%ED%9D%A5%EB%AF%BC.jpg?h=50&w=50'
