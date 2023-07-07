@@ -5,8 +5,8 @@ const Logo = () => {
     <Link href={'/'}>
       <Image
         src="/bloggy_logo.png"
-        width={100}
-        height={32}
+        width={130}
+        height={45}
         alt="bloggy_logo"
         priority
         data-testid="img"
