@@ -4,7 +4,7 @@ import { Effect } from '@/assets/color';
 export const StyledMenu = styled.div`
   position: absolute;
   right: 0;
-  top: 6rem;
+  top: 4.7rem;
   width: 10rem;
   border-radius: 5%;
   background-color: ${Effect.BACK};
