@@ -1,11 +1,10 @@
 'use client';
 import Navbar from '@/components/Navbar/Naverbar';
-import { StyledLayout } from '@/components/Layout/Layout-Styled';
+import { StyledLayout, StyledWrapper } from '@/components/Layout/Layout-Styled';
 import './globals.css';
 import StyledComponentsRegistry from '../lib/registry';
 import ReactQueryProvider from './ReactQueryProvider';
-// import { Inter } from 'next/font/google';
-// const inter = Inter({ subsets: ['latin'] });
+import Footer from '@/components/Footer/Footer';
 
 type LayoutProps = {
   children: React.ReactNode;
@@ -21,10 +20,13 @@ const RootLayout = ({ children }: LayoutProps) => {
     <html>
       <StyledComponentsRegistry>
         <StyledLayout>
-          <ReactQueryProvider>
-            <Navbar />
-            {children}
-          </ReactQueryProvider>
+          <StyledWrapper>
+            <ReactQueryProvider>
+              <Navbar />
+              {children}
+            </ReactQueryProvider>
+          </StyledWrapper>
+          <Footer />
         </StyledLayout>
       </StyledComponentsRegistry>
     </html>
