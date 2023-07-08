@@ -1,6 +1,7 @@
+'use client';
 import authStore from '@/store/authStore';
 import { useRef } from 'react';
-import UserThumbnail from './UserThumbnail';
+import UserThumbnail from '../Thumbnail/UserThumbnail';
 import useToggle from '@/hooks/useToggle';
 import UserMenu from './UserMenu';
 import { AiOutlineMenu } from 'react-icons/ai';

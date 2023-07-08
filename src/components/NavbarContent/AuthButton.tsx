@@ -1,3 +1,4 @@
+'use client';
 import Button from '@/components/Button/Button';
 import { Palette } from '@/assets/color';
 import Modal from '@/components/Modal/Modal';
