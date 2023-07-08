@@ -18,11 +18,7 @@ const Main = () => {
 
   return (
     <StyledMain>
-      {theme === Tabs[0].label ? (
-        <Card optionTheme={optionTheme} option={option} />
-      ) : (
-        <p>블로거</p>
-      )}
+      <Card theme={theme} optionTheme={optionTheme} option={option} />
     </StyledMain>
   );
 };

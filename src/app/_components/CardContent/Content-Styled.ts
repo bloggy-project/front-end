@@ -1,19 +1,28 @@
+import { Effect } from '@/assets/color';
 import styled from 'styled-components';
 
 export const StyledContent = styled.article`
+  position: relative;
   display: flex;
   border-radius: 5%;
   width: 100%;
   flex-direction: column;
   overflow: hidden;
-  padding: 1rem;
+  padding: 1.2rem;
   height: 35rem;
   background-color: white;
+  cursor: pointer;
+  box-shadow: 0.15rem 0.15rem 0.15rem 0.15rem ${Effect.SHADOW};
+  &:hover {
+    box-shadow: 0.25rem 0.25rem 0.25rem 0.25rem ${Effect.HOVER_BACK};
+    transform: translateY(-0.4rem);
+    transition: 0.2s ease-in-out;
+  }
   @media screen and (max-width: 986px) {
     height: 40rem;
   }
   @media screen and (max-width: 768px) {
-    min-width: 43rem;
+    min-width: 40rem;
     height: 47rem;
   }
 `;
