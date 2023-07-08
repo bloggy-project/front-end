@@ -1,3 +1,4 @@
+'use client';
 import {
   StyledMenu,
   StyledMenuLi,

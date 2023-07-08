@@ -1,21 +1,17 @@
 import Image from 'next/image';
-import { StyledThumbnailContainer } from './StyledUserThumbnail';
+import { StyledThumbnailContainer } from '../NavbarContent/StyledUserThumbnail';
+import useThumbnail from '@/hooks/useThumbnail';
 
 type UserThumbnailProps = {
-  thumbnail: string;
+  thumbnail: string | null;
   name: string;
 };
 
 const UserThumbnail = ({ thumbnail, name }: UserThumbnailProps) => {
+  const { thumbnailImg } = useThumbnail(thumbnail);
   return (
     <StyledThumbnailContainer>
-      <Image
-        src={
-          'https://dzbnjlxurlvs4.cloudfront.net/thumb/%EC%86%90%ED%9D%A5%EB%AF%BC.jpg?h=50&w=50'
-        }
-        alt={name}
-        fill
-      />
+      <Image src={thumbnailImg} alt={name} fill />
     </StyledThumbnailContainer>
   );
 };
