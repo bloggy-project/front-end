@@ -1,3 +1,4 @@
+'use client';
 import OptionTheme from './OptionTheme';
 import Search from './Search';
 import styled from 'styled-components';

@@ -1,8 +1,8 @@
+'use client';
 import { useEffect, useCallback } from 'react';
 import authStore from '@/store/authStore';
 import { shallow } from 'zustand/shallow';
 import { apiPrivate } from '@/lib/api/config';
-import { AxiosError } from 'axios';
 import { getTokenByRefresh } from '@/lib/api/token';
 import onTest from '@/lib/api/testApi';
 import { StatusToken } from '@/assets/status';
@@ -55,18 +55,6 @@ const useRefreshToken = () => {
 
         return response;
       },
-      // async (error: AxiosError) => {
-      //   if ((error?.response?.status as number) >= 400) {
-      //     try {
-      //       newAccessToken = await getTokenByRefresh();
-      //       setAccessToken(newAccessToken);
-      //     } catch (err) {
-      //       alert('다시 시도해 주세요');
-      //       return;
-      //     }
-      //   }
-      //   return Promise.reject(error);
-      // },
     );
 
     //액세스 토큰 재발급 후 user정보 업데이트
@@ -84,3 +72,16 @@ const useRefreshToken = () => {
 };
 
 export default useRefreshToken;
+
+// async (error: AxiosError) => {
+//   if ((error?.response?.status as number) >= 400) {
+//     try {
+//       newAccessToken = await getTokenByRefresh();
+//       setAccessToken(newAccessToken);
+//     } catch (err) {
+//       alert('다시 시도해 주세요');
+//       return;
+//     }
+//   }
+//   return Promise.reject(error);
+// },
