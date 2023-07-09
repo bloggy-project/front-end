@@ -1,8 +1,9 @@
-import { useInfiniteQuery } from '@tanstack/react-query';
+import { InfiniteData, useInfiniteQuery } from '@tanstack/react-query';
 import { getRecentPages, getPopularPages } from '../../lib/api/search';
 import { GetRecentPages, GetPopularPages } from '../key';
 import { Pages } from '@/lib/types/pages';
 import { OptionTheme } from '@/assets/keyword';
+import MyLocalStorage from '@/lib/handler/handleLocalStorage';
 
 const useGetUserProfileList = (optionTheme: string, option: string) => {
   const { data, fetchNextPage, hasNextPage, isLoading, isFetchingNextPage } =
@@ -48,6 +49,12 @@ const useGetUserProfileList = (optionTheme: string, option: string) => {
       onError: (error: Error) => {
         console.log(error.message);
       },
+      // onSuccess: (data: InfiniteData<Pages>) => {
+      //   console.log('data', data.pages[0].content.length);
+      //   const name = 'contentLen';
+      //   const contentStorage = new MyLocalStorage<number>(name);
+      //   contentStorage.set(data.pages[0].content.length);
+      // }, 최초 성공 후 데이터 길이 브라우저에 저장
     });
 
   return {

@@ -1,3 +1,4 @@
+'use client';
 import ModalWrapper from './ModalWrapper';
 import { StyledModal } from './Modal-Styled';
 import { useEffect } from 'react';

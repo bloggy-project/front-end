@@ -1,3 +1,4 @@
+'use client';
 import { useState } from 'react';
 import { Auth_Tabs as tabs } from '@/assets/keyword';
 import { CgCloseR } from 'react-icons/cg';
