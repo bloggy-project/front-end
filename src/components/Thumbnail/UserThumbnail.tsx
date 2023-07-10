@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { StyledThumbnailContainer } from '../NavbarContent/StyledUserThumbnail';
+import { StyledThumbnailContainer } from '../NavbarContent/UserThumbnail-Styled';
 import useThumbnail from '@/hooks/useThumbnail';
 
 type UserThumbnailProps = {
