@@ -28,7 +28,7 @@ export const createQueryWrapper = () => {
 
 const renderWithQueryProvider = (
   ui: ReactElement,
-  options: Omit<RenderOptions, 'wrapper'>,
+  options?: Omit<RenderOptions, 'wrapper'>,
 ) => render(ui, { wrapper: createQueryWrapper(), ...options });
 
 export * from '@testing-library/react';
