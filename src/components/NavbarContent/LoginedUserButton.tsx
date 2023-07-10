@@ -5,7 +5,7 @@ import UserThumbnail from '../Thumbnail/UserThumbnail';
 import useToggle from '@/hooks/useToggle';
 import UserMenu from './UserMenu';
 import { AiOutlineMenu } from 'react-icons/ai';
-import { StyledLoginedUserButton } from './StyledLoginedUserButton';
+import { StyledLoginedUserButton } from './LoginedUserButton-Styled';
 
 const LoginedUserButton = () => {
   const menuRef = useRef<HTMLDivElement>(null);
