@@ -14,6 +14,7 @@ import { loginProps } from '@/lib/types/auth';
 import modalStore from '@/store/modalStore';
 import authStore from '@/store/authStore';
 import { shallow } from 'zustand/shallow';
+import useDisable from '@/hooks/useDisable';
 
 const Login = () => {
   const {
@@ -26,7 +27,8 @@ const Login = () => {
     mode: 'onChange',
   });
   const setToggleModal = modalStore((state) => state.setToggleModal);
-  const { setUserInfo, setAccessToken } = authStore(
+  const { isDisable, autoSetDisableWithData } = useDisable();
+  const { setUserInfo } = authStore(
     (state) => ({
       setAccessToken: state.setAccessToken,
       setUserInfo: state.setUserInfo,
@@ -34,25 +36,26 @@ const Login = () => {
     shallow,
   );
   const submitLogin = async ({ email, password }: loginProps) => {
-    const {
-      thumbnail,
-      name,
-      email: userEmail,
-    } = await onLogin(email, password);
+    try {
+      const {
+        thumbnail,
+        name,
+        email: userEmail,
+      } = await autoSetDisableWithData(onLogin(email, password));
 
-    const userInfo = { thumbnail, name, email: userEmail };
-    setUserInfo(userInfo);
-    reset();
-    setToggleModal();
-  };
-
-  const submitCancel = () => {
-    alert('로그인에 실패하였습니다. 다시 한 번 확인해 주세요.');
+      const userInfo = { thumbnail, name, email: userEmail };
+      alert('로그인에 성공하였습니다.');
+      setUserInfo(userInfo);
+      reset();
+      setToggleModal();
+    } catch (err) {
+      alert('로그인에 실패하였습니다. 다시 한 번 확인해 주세요.');
+    }
   };
 
   return (
     <StyledFormContainer>
-      <StyledForm onSubmit={handleSubmit(submitLogin, submitCancel)}>
+      <StyledForm onSubmit={handleSubmit(submitLogin)}>
         <StyledInput
           id="email"
           placeholder="이메일을 입력해 주세요"
@@ -73,6 +76,7 @@ const Login = () => {
           hover={'opacity'}
           size={'modal'}
           content={'로그인'}
+          disabled={isDisable}
         />
       </StyledForm>
     </StyledFormContainer>

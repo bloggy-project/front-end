@@ -1,3 +1,4 @@
+import { loginApi } from '@/lib/types/auth';
 import { useState } from 'react';
 
 const useDisable = () => {
@@ -20,11 +21,24 @@ const useDisable = () => {
     }
   };
 
+  const autoSetDisableWithData = async <T>(
+    asyncFunc: Promise<T>,
+  ): Promise<T> => {
+    try {
+      onDisable();
+      const data = await asyncFunc;
+      return data;
+    } finally {
+      notDisable();
+    }
+  };
+
   return {
     isDisable,
     onDisable,
     notDisable,
     autoSetDisable,
+    autoSetDisableWithData,
   };
 };
 
