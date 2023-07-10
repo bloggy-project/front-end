@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import { StyledThumbnailContainer } from '../NavbarContent/UserThumbnail-Styled';
 import useThumbnail from '@/hooks/useThumbnail';
+import { ImageSizesProps } from '@/assets/size';
 
 type UserThumbnailProps = {
   thumbnail: string | null;
@@ -11,7 +12,12 @@ const UserThumbnail = ({ thumbnail, name }: UserThumbnailProps) => {
   const { thumbnailImg } = useThumbnail(thumbnail);
   return (
     <StyledThumbnailContainer>
-      <Image src={thumbnailImg} alt={name} fill />
+      <Image
+        src={thumbnailImg}
+        alt={name}
+        fill
+        sizes={ImageSizesProps.default}
+      />
     </StyledThumbnailContainer>
   );
 };

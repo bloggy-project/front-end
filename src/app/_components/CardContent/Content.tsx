@@ -11,6 +11,7 @@ import {
 import { FaHeart, FaRegCommentDots } from 'react-icons/fa';
 import Image from 'next/image';
 import { Content } from '@/lib/types/pages';
+import { ImageSizesProps } from '@/assets/size';
 
 type ContentProps = {
   data: Content;
@@ -22,7 +23,13 @@ const Content = ({ data }: ContentProps) => {
   return (
     <StyledContent>
       <StyledImgContainer>
-        <Image src={data.thumbnail} alt={data.title} fill />
+        <Image
+          src={data.thumbnail}
+          alt={data.title}
+          fill
+          sizes={ImageSizesProps.default}
+          priority
+        />
       </StyledImgContainer>
       <StyledDetails>
         <StyledDetailsH3>{data.title}</StyledDetailsH3>
