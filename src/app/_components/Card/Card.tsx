@@ -41,9 +41,9 @@ const Card = ({ theme, optionTheme, option }: CardProps) => {
   return (
     <>
       {pageDatas?.map((pages) =>
-        pages.content.map((data) => (
-          <StyledCard key={data.postId}>
-            <Content data={data} />
+        pages.content.map((data, index) => (
+          <StyledCard key={data.postId + index}>
+            <Content key={data.title} data={data} />
           </StyledCard>
         )),
       )}
