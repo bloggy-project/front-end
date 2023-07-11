@@ -2,7 +2,7 @@ name: Bloggy-Test
 on:
   pull_request:
     branches: ['dev']
-    paths: ['feature/**', 'fix/**', 'style/**']
+    paths: ['src/**']
 
 jobs:
   Run-test:
