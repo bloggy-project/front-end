@@ -1,7 +1,8 @@
 name: Bloggy-Test
 on:
   pull_request:
-    branches: ['dev']
+    branches:
+      - 'dev'
     paths: ['src/**']
 
 jobs:
@@ -34,8 +35,5 @@ jobs:
         run: yarn install
       #실행환경에서 cpu코어 수를 계산하여 병렬 테스트 수행. 소규모 테스트일 경우에는 역효과일 수 있음.
       #https://jestjs.io/docs/troubleshooting
-      - name: Get number of CPU cores
-        id: cpu-cores
-        uses: SimenB/github-actions-cpu-cores@v1
       - name: Run tests
-        run: yarn test --max-workers ${{ steps.cpu-cores.outputs.count }}
+        run: yarn test
