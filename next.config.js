@@ -1,5 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  eslint: {
+    ignoreDuringBuilds: true,
+  }, //dev 브랜치 빌드까지는 eslint 무시
   reactStrictMode: false,
   swcMinify: true, //swc 빌드 툴 사용 옵션
   compiler: {
