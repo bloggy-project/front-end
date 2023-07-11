@@ -1,7 +1,12 @@
 name: Bloggy-Test
 on:
   pull_request:
-    branches: ['dev']
+    branches:
+      - dev
+    paths:
+      - 'feature/**'
+      - 'fix/**'
+      - 'style/**'
 jobs:
   Run-test:
     runs-on: ubuntu-latest

@@ -7,7 +7,6 @@ COPY package.json .
 #COPY를 통해 /app에 파일을 복사한다. 빈번이 작성되는 것을 후순위에서 복사한다. package.json을 먼저 복사하도록 하자
 #COPY package.json package-lock.json ./
 
-RUN rm yarn.lock || true
 RUN npm install --legacy-peer-deps yarn \
 yarn install
 #yarn이 아니라 기본 npm이었으면 이 시점에서 npm install 실행. yarn을 쓸 때는 우선적으로 yarn을 다운받아야 한다.
