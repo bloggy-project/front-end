@@ -61,7 +61,7 @@ jobs:
             fi
 
             if docker run -rm --name "${{ env.Container }}" -dp 80:3000 "${{ env.Image }}"; then
-             echo "Container run successfully"
+             echo "Container created and run successfully"
             else
              echo "Error: Failed to run the container"
             fi
