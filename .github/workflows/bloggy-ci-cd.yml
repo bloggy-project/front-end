@@ -60,10 +60,10 @@ jobs:
              echo "Error: Failed to pull the image"
             fi
 
-            if docker run -rm --name "${{ env.Container }}" -dp 80:3000 "${{ env.Image }}"
-             echo "Container removed successfully or not found"
+            if docker run -rm --name "${{ env.Container }}" -dp 80:3000 "${{ env.Image }}"; then
+             echo "Container created and run successfully"
             else
-             echo "Error: Container does not exist or could not be removed"
+             echo "Error: Failed to run the container"
             fi
           # docker stop ${{ env.Container }}
           # docker rmi "${{ env.Image }}"
