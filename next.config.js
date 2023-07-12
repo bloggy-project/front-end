@@ -21,7 +21,7 @@ const nextConfig = {
     return [
       {
         source: '/:path*', //api request path
-        destination: `https://bloggy.kro.kr/api/:path*`, //목적 path
+        destination: `${process.env.NEXT_PUBLIC_API_URL}/:path*`, //목적 path
       },
     ];
   },
