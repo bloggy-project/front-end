@@ -1,8 +1,7 @@
 name: Bloggy-Test
 on:
   pull_request:
-    branches:
-      - 'dev'
+    branches: [dev]
     paths: ['src/**']
 
 jobs:
@@ -23,17 +22,20 @@ jobs:
       #1-1. cache actions에는 두 가지 옵션을 필수적으로 설정해줘야 한다.
       #1-2. path : 캐싱할 파일들이 있는 경로 지정
       #1-3. key : 캐싱 여부를 구분할 key
-      # - uses: actions/cache@v3
-      #   id: yarn-cache
-      #   with:
-      #     path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-      #     key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-      #     restore-keys: |
-      #       ${{ runner.os }}-yarn-
+      - uses: actions/cache@v3
+        id: yarn-cache
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
       - name: Install Dependencies
         # if: steps.yarn-cache.outputs.cache-hit != 'true'
         run: yarn install
       #실행환경에서 cpu코어 수를 계산하여 병렬 테스트 수행. 소규모 테스트일 경우에는 역효과일 수 있음.
       #https://jestjs.io/docs/troubleshooting
+      - name: Get number of CPU cores
+        id: cpu-cores
+        uses: SimenB/github-actions-cpu-cores@v1
       - name: Run tests
-        run: yarn test
+        run: yarn test --max-workers ${{ steps.cpu-cores.outputs.count }}
