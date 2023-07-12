@@ -10,11 +10,6 @@ type LayoutProps = {
   children: React.ReactNode;
 };
 
-export const metadata = {
-  title: 'bloggy.kro.kr',
-  description: 'welcome bloggy',
-};
-
 const RootLayout = ({ children }: LayoutProps) => {
   return (
     <html>
