@@ -3,10 +3,8 @@ name: Bloggy-CI-CD
 #동작 트리거 설정
 on:
   #Bloggy-Test 워크플로우가 통과하면 동작
-  workflow_run:
-    workflows: ['Bloggy-Test']
-    types:
-      - completed
+  push:
+    branches: [dev]
 
 jobs:
   Build-and-Deploy:
@@ -19,8 +17,6 @@ jobs:
     steps:
       - name: Checkout source code
         uses: actions/checkout@v3
-        with:
-          ref: feature/index-page
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
       - run: touch .env #env 파일 생성
