@@ -44,7 +44,7 @@ const Search = () => {
         ref={inputRef}
         type="text"
         isopen={isOpen ? 'open' : 'close'}
-        onChange={(e) => onChangeSearched(e)}
+        onChange={(e: ChangeEvent<HTMLInputElement>) => onChangeSearched(e)}
       />
       <StyledSearchButton onClick={onChangeOpen}>
         <BsSearch className="SearchButton" />
