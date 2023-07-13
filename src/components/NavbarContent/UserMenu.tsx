@@ -5,6 +5,7 @@ import {
 } from '@/components/NavbarContent/StyledUserMenu';
 import { useLocalStorage } from '@/hooks/useLocalStorage';
 import { UserInfo } from '@/lib/types/auth';
+import Link from 'next/link';
 
 const StorageName = 'userinfo';
 
@@ -13,19 +14,21 @@ const UserMenu = () => {
   const menu = [
     { name: '내 블로그', value: storageData?.name },
     { name: '설정', value: 'settings' },
-    { name: '로그아웃', value: 'logout' },
+    { name: '로그아웃', value: '', onClick: () => console.log(1212) },
   ];
 
   return (
     <StyledMenu>
       <ul>
         {menu.map((item) => (
-          <StyledMenuLi
-            key={item.name + item.value}
-            onClick={() => console.log(item.value)}
-          >
-            {item.name}
-          </StyledMenuLi>
+          <Link key={item.name + item.value} href={`/${item.value}`} passHref>
+            <StyledMenuLi
+              style={{ borderBottom: 'solid 1px lightgray' }}
+              onClick={item?.onClick}
+            >
+              {item.name}
+            </StyledMenuLi>
+          </Link>
         ))}
       </ul>
     </StyledMenu>
