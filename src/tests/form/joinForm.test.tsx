@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import UserEvent from '@testing-library/user-event';
-import Join from '@/components/ModalContent/Join';
+import Join from '@/components/Form/Join';
 
 describe('JoinForm Test', () => {
   it('typing Join inputs', async () => {
