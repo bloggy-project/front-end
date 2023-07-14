@@ -6,7 +6,7 @@ import selectKeywordStore from '@/store/selectKeywordStore';
 // eslint-disable-next-line jest/no-disabled-tests
 describe('Tab Test', () => {
   // eslint-disable-next-line jest/no-focused-tests
-  it.only('Tab change on click', async () => {
+  it('Tab change on click', async () => {
     render(<SelectTheme />);
     //zustand store mocking
     const { result } = renderHook(() => selectKeywordStore());
