@@ -15,6 +15,7 @@ import modalStore from '@/store/modalStore';
 import authStore from '@/store/authStore';
 import { shallow } from 'zustand/shallow';
 import useDisable from '@/hooks/useDisable';
+import { MsgPlaceholder } from '@/assets/message';
 
 const Login = () => {
   const {
@@ -57,16 +58,14 @@ const Login = () => {
     <StyledFormContainer>
       <StyledForm onSubmit={handleSubmit(submitLogin)}>
         <StyledInput
-          id="email"
-          placeholder="이메일을 입력해 주세요"
+          placeholder={MsgPlaceholder.email}
           {...register('email')}
         />
         <StyledErrMsg>{errors.email?.message}</StyledErrMsg>
 
         <StyledInput
           type="password"
-          id="pwd"
-          placeholder="비밀번호를 입력해 주세요"
+          placeholder={MsgPlaceholder.password}
           {...register('password')}
         />
         <StyledErrMsg>{errors.password?.message}</StyledErrMsg>

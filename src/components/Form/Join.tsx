@@ -2,7 +2,7 @@ import {
   StyledFormContainer,
   StyledForm,
   StyledInput,
-  StyledMinInput,
+  StyledCombInput,
   StyledInputContainer,
   StyledErrMsg,
 } from './Form-Styled';
@@ -15,6 +15,7 @@ import { checkUserName, onJoin } from '@/lib/api/auth';
 import { joinProps } from '@/lib/types/auth';
 import useCheckStrings from '@/hooks/useCheckStrings';
 import useDisable from '@/hooks/useDisable';
+import { MsgPlaceholder } from '@/assets/message';
 
 const Join = () => {
   const {
@@ -69,32 +70,33 @@ const Join = () => {
     <StyledFormContainer>
       <StyledForm onSubmit={handleSubmit(submitJoin)}>
         <StyledInput
-          placeholder="이메일을 입력해 주세요"
+          placeholder={MsgPlaceholder.email}
           {...register('email')}
         />
         <StyledErrMsg>{errors.email?.message}</StyledErrMsg>
         <StyledInput
           type="password"
-          placeholder="비밀번호를 입력해 주세요"
+          placeholder={MsgPlaceholder.password}
           {...register('password')}
         />
         <StyledErrMsg>{errors.password?.message}</StyledErrMsg>
         <StyledInput
           type="password"
-          placeholder="비밀번호를 다시 한 번 입력해 주세요"
+          placeholder={MsgPlaceholder.pwdConfirm}
           {...register('pwdConfirm')}
         />
         <StyledErrMsg>{errors.pwdConfirm?.message}</StyledErrMsg>
         <StyledInputContainer>
-          <StyledMinInput
-            placeholder="닉네임을 입력해 주세요"
+          <StyledCombInput
+            placeholder={MsgPlaceholder.name}
+            combbtntext="중복 확인"
             {...register('name')}
           />
           <Button
             type="button"
             color={Palette.NATURAL}
             hover={'opacity'}
-            size={'modal-sm'}
+            size={'comb'}
             content={'중복 확인'}
             onClick={handleCheckName}
             disabled={isDisable}
