@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import UserEvent from '@testing-library/user-event';
-import Login from '@/components/ModalContent/Login';
+import Login from '@/components/Form/Login';
 
 describe('LoinForm Test', () => {
   const setup = () => {

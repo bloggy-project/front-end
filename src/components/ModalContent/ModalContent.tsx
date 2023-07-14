@@ -7,8 +7,8 @@ import {
   StyledTabButtonContainer,
   StyledTabButton,
 } from './ModalContent-Styled';
-import Login from './Login';
-import Join from './Join';
+import Login from '../Form/Login';
+import Join from '../Form/Join';
 import modalStore from '@/store/modalStore';
 
 const SelectTheme = () => {

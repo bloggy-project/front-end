@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 type StyledButtonProps = {
   color?: string;
   hover: 'none' | 'opacity';
-  size: 'sm' | 'md' | 'lg' | 'modal' | 'modal-sm';
+  size: 'sm' | 'md' | 'lg' | 'modal' | 'comb';
 };
 
 const getSize = ({ size = 'md' }) => {
@@ -31,7 +31,7 @@ const getSize = ({ size = 'md' }) => {
         border-radius: 10px;
       `;
     }
-    case 'modal-sm': {
+    case 'comb': {
       return css`
         font-size: 1.4rem;
         font-weight: 600;
