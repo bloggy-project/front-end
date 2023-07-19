@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { StyledThumbnailContainer } from '../NavbarContent/UserThumbnail-Styled';
+import { StyledThumbnailContainer } from './UserThumbnail-Styled';
 import useThumbnail from '@/hooks/useThumbnail';
 import { ImageSizesProps } from '@/assets/size';
 
