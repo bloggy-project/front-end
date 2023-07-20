@@ -2,19 +2,17 @@ import Image from 'next/image';
 import { StyledThumbnailContainer } from './UserThumbnail-Styled';
 import useThumbnail from '@/hooks/useThumbnail';
 import { ImageSizesProps } from '@/assets/size';
+import useGetUserInfo from '@/query/userinfo/useGetUserInfo';
 
-type UserThumbnailProps = {
-  thumbnail: string | null;
-  name: string;
-};
+const UserThumbnail = () => {
+  const { userInfo } = useGetUserInfo();
+  const { thumbnailImg } = useThumbnail(userInfo.thumbnail);
 
-const UserThumbnail = ({ thumbnail, name }: UserThumbnailProps) => {
-  const { thumbnailImg } = useThumbnail(thumbnail);
   return (
     <StyledThumbnailContainer>
       <Image
         src={thumbnailImg}
-        alt={name}
+        alt={thumbnailImg}
         fill
         sizes={ImageSizesProps.default}
       />

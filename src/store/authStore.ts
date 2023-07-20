@@ -1,8 +1,13 @@
 import { StatusToken } from '@/assets/status';
 import MyLocalStorage from '@/lib/handler/handleLocalStorage';
-import { UserInfo } from '@/lib/types/auth';
 import { create } from 'zustand';
 import { devtools } from 'zustand/middleware';
+
+export type UserInfo = {
+  thumbnail: null | string;
+  name: string;
+  email: string;
+};
 
 type authState = {
   accessToken: string | null;

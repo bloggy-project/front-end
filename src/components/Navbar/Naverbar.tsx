@@ -9,6 +9,7 @@ const Navbar = () => {
   const accessToken = useRefreshToken();
   const isOpenModal = modalStore((state) => state.isOpenModal);
   useScrollOverflow(isOpenModal);
+
   return (
     <NavbarWrapper>
       <Logo />

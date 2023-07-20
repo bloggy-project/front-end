@@ -1,4 +1,4 @@
-import { loginSchema } from '@/lib/validation/schame';
+import { loginFormSchema } from '@/lib/validation/schame';
 import {
   StyledFormContainer,
   StyledForm,
@@ -24,7 +24,7 @@ const Login = () => {
     formState: { errors },
     reset,
   } = useForm({
-    resolver: yupResolver(loginSchema),
+    resolver: yupResolver(loginFormSchema),
     mode: 'onChange',
   });
   const setToggleModal = modalStore((state) => state.setToggleModal);
@@ -38,17 +38,11 @@ const Login = () => {
   );
   const submitLogin = async ({ email, password }: loginProps) => {
     try {
-      const {
-        thumbnail,
-        name,
-        email: userEmail,
-      } = await autoSetDisableWithData(onLogin(email, password));
-
-      const userInfo = { thumbnail, name, email: userEmail };
-      alert('로그인에 성공하였습니다.');
+      const userInfo = await autoSetDisableWithData(onLogin(email, password));
       setUserInfo(userInfo);
       reset();
       setToggleModal();
+      alert('로그인에 성공하였습니다.');
     } catch (err) {
       alert('로그인에 실패하였습니다. 다시 한 번 확인해 주세요.');
     }

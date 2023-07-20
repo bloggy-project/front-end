@@ -6,7 +6,7 @@ import {
   StyledInputContainer,
   StyledErrMsg,
 } from './Form-Styled';
-import { joinSchema, nameSchema } from '@/lib/validation/schame';
+import { joinFormSchema, nameSchema } from '@/lib/validation/schame';
 import Button from '../Button/Button';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
@@ -27,7 +27,7 @@ const Join = () => {
     getValues,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(joinSchema),
+    resolver: yupResolver(joinFormSchema),
     mode: 'onChange',
   });
   const { isCheckedStrings, onSetStrings, onClearStrings } = useCheckStrings();
