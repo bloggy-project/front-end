@@ -4,7 +4,7 @@ import authStore from '@/store/authStore';
 import { shallow } from 'zustand/shallow';
 import { apiPrivate } from '@/lib/api/config';
 import { getTokenByRefresh } from '@/lib/api/token';
-import onTest from '@/lib/api/testApi';
+import { getUserInfo } from '@/lib/api/userinfo';
 import { StatusToken } from '@/assets/status';
 
 const useRefreshToken = () => {
@@ -23,10 +23,10 @@ const useRefreshToken = () => {
     try {
       newAccessToken = await getTokenByRefresh();
       setAccessToken(newAccessToken);
-      if (newAccessToken) {
-        const userInfo = await onTest();
-        setUserInfo(userInfo);
-      }
+      // if (newAccessToken) {
+      //   const userInfo = await getUserInfo();
+      //   setUserInfo(userInfo);
+      // }
     } catch (err) {
       //액세스 토큰 발급 실패에 따라 상태 업데이트
       setAccessToken(StatusToken.No_token);

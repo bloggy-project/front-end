@@ -1,17 +1,16 @@
-import { InfiniteData, useInfiniteQuery } from '@tanstack/react-query';
+import { useInfiniteQuery } from '@tanstack/react-query';
 import { getRecentPages, getPopularPages } from '../../lib/api/search';
-import { GetRecentPages, GetPopularPages } from '../key';
+import QueryKey from '../key';
 import { Pages } from '@/lib/types/pages';
 import { OptionTheme } from '@/assets/keyword';
-import MyLocalStorage from '@/lib/handler/handleLocalStorage';
 
 const useGetUserProfileList = (optionTheme: string, option: string) => {
   const { data, fetchNextPage, hasNextPage, isLoading, isFetchingNextPage } =
     useInfiniteQuery({
       queryKey:
         optionTheme === OptionTheme[0].name
-          ? [GetRecentPages]
-          : [GetPopularPages],
+          ? [QueryKey.GetRecentPages]
+          : [QueryKey.GetPopularPages],
       queryFn:
         optionTheme === OptionTheme[0].name
           ? async ({ pageParam = null }) => getRecentPages(pageParam)

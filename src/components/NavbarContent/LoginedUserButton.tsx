@@ -1,5 +1,4 @@
 'use client';
-import authStore from '@/store/authStore';
 import { useRef } from 'react';
 import UserThumbnail from '../Thumbnail/UserThumbnail';
 import useToggle from '@/hooks/useToggle';
@@ -13,7 +12,7 @@ const LoginedUserButton = () => {
 
   return (
     <StyledLoginedUserButton ref={menuRef} onClick={onChangeOpen}>
-      <UserThumbnail thumbnail={''} name={''} />
+      <UserThumbnail />
       <AiOutlineMenu />
       {isOpen && <UserMenu />}
     </StyledLoginedUserButton>

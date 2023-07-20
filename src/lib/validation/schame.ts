@@ -1,6 +1,6 @@
 import * as yup from 'yup';
 
-export const loginSchema = yup.object().shape({
+export const loginFormSchema = yup.object().shape({
   email: yup
     .string()
     .required('이메일을 입력해주세요.')
@@ -19,7 +19,7 @@ export const loginSchema = yup.object().shape({
     ),
 });
 
-export const joinSchema = yup.object().shape({
+export const joinFormSchema = yup.object().shape({
   email: yup
     .string()
     .required('이메일을 입력해주세요.')
@@ -52,3 +52,18 @@ export const nameSchema = yup
   .required('닉네임을 입력해 주세요.')
   .min(2, '2자 이상으로 입력해 주세요')
   .max(12, '12자 이하로 입력해 주세요.');
+
+export const nameFormSchema = yup.object().shape({
+  newName: nameSchema,
+});
+
+export const blognameFormSchema = yup.object().shape({
+  newBlogname: yup
+    .string()
+    .min(2, '2자 이상으로 입력해 주세요')
+    .max(12, '12자 이하로 입력해 주세요.'),
+});
+
+export const descriptionFormSchema = yup.object().shape({
+  newDescription: yup.string().max(30, '30자 이하로 입력해 주세요.'),
+});
