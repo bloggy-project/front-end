@@ -2,6 +2,7 @@ import { getUserInfo } from '@/lib/api/userinfo';
 import { useQuery } from '@tanstack/react-query';
 import QueryKey from '../key';
 import { UserInfo } from '@/lib/types/auth';
+import { MsgAlert } from '@/assets/message';
 
 const useGetUserInfo = () => {
   const { data, refetch, isError, isLoading } = useQuery({
@@ -9,7 +10,7 @@ const useGetUserInfo = () => {
     queryFn: getUserInfo,
     retry: false,
     onError: () => {
-      alert('해당 유저가 존재하지 않습니다. 다시 한 번 시도해주세요');
+      alert(MsgAlert.Userinfo.notExist);
     },
     onSuccess: (data) => {
       console.log('data', data);

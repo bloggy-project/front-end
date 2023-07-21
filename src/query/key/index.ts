@@ -1,2 +1,7 @@
-export const GetRecentPages = 'GetRecentPages';
-export const GetPopularPages = 'GetPopularPages';
+const QueryKey = {
+  GetRecentPages: 'GetRecentPages',
+  GetPopularPages: 'GetPopularPages',
+  UserInfo: 'UserInfo',
+};
+
+export default QueryKey;
