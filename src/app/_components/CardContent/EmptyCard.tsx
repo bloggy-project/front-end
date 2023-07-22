@@ -1,4 +1,4 @@
-import { Tabs } from '@/assets/keyword';
+import { Theme } from '@/assets/keyword';
 import { StyledEmptyContent } from './EmptyCard-Styled';
 import { MdContentPasteOff, MdPersonSearch } from 'react-icons/md';
 
@@ -10,7 +10,7 @@ type EmptyCardProps = {
 };
 
 const EmptyCard = ({ contentTheme }: EmptyCardProps) => {
-  if (contentTheme === Tabs[0].label) {
+  if (contentTheme === Theme[0].label) {
     return (
       <StyledEmptyContent>
         <MdContentPasteOff />
