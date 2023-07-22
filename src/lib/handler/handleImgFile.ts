@@ -1,3 +1,5 @@
+import { MsgAlert } from '@/assets/message';
+
 export const handleImgFile = (
   fileList: FileList | null,
   setImgFile: (img: string) => void,
@@ -14,7 +16,7 @@ export const handleImgFile = (
         setImgFile(URL.createObjectURL(file));
       } else {
         // File is not an image
-        alert('이미지 파일을 등록해 주세요');
+        alert(MsgAlert.notImgFile);
       }
     });
   }

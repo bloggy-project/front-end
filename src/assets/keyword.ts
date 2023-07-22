@@ -1,4 +1,4 @@
-export const Tabs = [
+export const Theme = [
   {
     id: 1,
     label: '게시물',
