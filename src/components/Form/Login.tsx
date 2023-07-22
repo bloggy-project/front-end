@@ -14,21 +14,20 @@ import { loginProps } from '@/lib/types/auth';
 import modalStore from '@/store/modalStore';
 import authStore from '@/store/authStore';
 import { shallow } from 'zustand/shallow';
-import useDisable from '@/hooks/useDisable';
-import { MsgPlaceholder } from '@/assets/message';
+import { MsgAlert, MsgPlaceholder } from '@/assets/message';
 
 const Login = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
     reset,
   } = useForm({
     resolver: yupResolver(loginFormSchema),
     mode: 'onChange',
   });
   const setToggleModal = modalStore((state) => state.setToggleModal);
-  const { isDisable, autoSetDisableWithData } = useDisable();
+
   const { setUserInfo } = authStore(
     (state) => ({
       setAccessToken: state.setAccessToken,
@@ -38,13 +37,13 @@ const Login = () => {
   );
   const submitLogin = async ({ email, password }: loginProps) => {
     try {
-      const userInfo = await autoSetDisableWithData(onLogin(email, password));
+      const userInfo = await onLogin(email, password);
       setUserInfo(userInfo);
       reset();
       setToggleModal();
-      alert('로그인에 성공하였습니다.');
+      alert(MsgAlert.Login.success);
     } catch (err) {
-      alert('로그인에 실패하였습니다. 다시 한 번 확인해 주세요.');
+      alert(MsgAlert.Login.fail);
     }
   };
 
@@ -69,7 +68,7 @@ const Login = () => {
           hover={'opacity'}
           size={'modal'}
           content={'로그인'}
-          disabled={isDisable}
+          disabled={isSubmitting}
         />
       </StyledForm>
     </StyledFormContainer>
