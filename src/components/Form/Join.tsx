@@ -14,8 +14,7 @@ import { Palette } from '@/assets/color';
 import { checkUserName, onJoin } from '@/lib/api/auth';
 import { joinProps } from '@/lib/types/auth';
 import useCheckStrings from '@/hooks/useCheckStrings';
-import useDisable from '@/hooks/useDisable';
-import { MsgPlaceholder } from '@/assets/message';
+import { MsgAlert, MsgPlaceholder } from '@/assets/message';
 
 const Join = () => {
   const {
@@ -25,19 +24,19 @@ const Join = () => {
     reset,
     clearErrors,
     getValues,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm({
     resolver: yupResolver(joinFormSchema),
     mode: 'onChange',
   });
   const { isCheckedStrings, onSetStrings, onClearStrings } = useCheckStrings();
-  const { isDisable, autoSetDisable } = useDisable();
 
   const submitJoin = async (joinInfo: joinProps) => {
+    //폼 제출 전 닉네임 중복확인 여부 확인
     const name = getValues().name;
     if (isCheckedStrings === name) {
-      await autoSetDisable(onJoin(joinInfo));
-      alert('회원가입이 완료되었습니다');
+      await onJoin(joinInfo);
+      alert(MsgAlert.Join.success);
       reset();
     } else {
       setError('name', {
@@ -50,15 +49,15 @@ const Join = () => {
     const name = getValues().name;
     if (await nameSchema.isValid(name)) {
       try {
-        await autoSetDisable(checkUserName(name));
+        await checkUserName(name);
         onSetStrings(name);
         clearErrors('name');
-        alert('사용할 수 있는 닉네임입니다');
+        alert(MsgAlert.Join.usableName);
       } catch (err) {
         if (err instanceof Error) {
-          alert('이미 존재하는 닉네임입니다');
+          alert(MsgAlert.Join.disUseableName);
           setError('name', {
-            message: '이미 존재하는 닉네임입니다',
+            message: MsgAlert.Join.disUseableName,
           });
           onClearStrings();
         }
@@ -99,7 +98,7 @@ const Join = () => {
             size={'comb'}
             content={'중복 확인'}
             onClick={handleCheckName}
-            disabled={isDisable}
+            disabled={isSubmitting}
           />
         </StyledInputContainer>
         <StyledErrMsg>{errors.name?.message}</StyledErrMsg>
@@ -109,7 +108,7 @@ const Join = () => {
           hover={'opacity'}
           size={'modal'}
           content={'회원가입'}
-          disabled={isDisable}
+          disabled={isSubmitting}
         />
       </StyledForm>
     </StyledFormContainer>
