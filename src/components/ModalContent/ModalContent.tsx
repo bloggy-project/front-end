@@ -1,6 +1,6 @@
 'use client';
 import { useState } from 'react';
-import { Auth_Tabs as tabs } from '@/assets/keyword';
+import { AuthTheme } from '@/assets/keyword';
 import { CgCloseR } from 'react-icons/cg';
 import {
   StyledModalContent,
@@ -12,25 +12,25 @@ import Join from '../Form/Join';
 import modalStore from '@/store/modalStore';
 
 const SelectTheme = () => {
-  const [authTheme, setAuthTheme] = useState(tabs[0].label);
+  const [authTheme, setAuthTheme] = useState(AuthTheme[0].label);
   const setToggleModal = modalStore((state) => state.setToggleModal);
   return (
     <StyledModalContent>
       <StyledTabButtonContainer>
         <div>
-          {tabs.map((tab) => (
+          {AuthTheme.map((theme) => (
             <StyledTabButton
-              key={tab.id + tab.label}
-              onClick={() => setAuthTheme(tab.label)}
-              $active={authTheme === tab.label}
+              key={theme.id + theme.label}
+              onClick={() => setAuthTheme(theme.label)}
+              $active={authTheme === theme.label}
             >
-              {tab.label}
+              {theme.label}
             </StyledTabButton>
           ))}
         </div>
         <CgCloseR onClick={setToggleModal} />
       </StyledTabButtonContainer>
-      {authTheme === tabs[0].label ? <Login /> : <Join />}
+      {authTheme === AuthTheme[0].label ? <Login /> : <Join />}
     </StyledModalContent>
   );
 };

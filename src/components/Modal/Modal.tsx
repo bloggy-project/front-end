@@ -1,7 +1,7 @@
 'use client';
 import ModalWrapper from './ModalWrapper';
 import { StyledModal } from './Modal-Styled';
-import AuthTheme from '../ModalContent/ModalContent';
+import SelectTheme from '../ModalContent/ModalContent';
 import modalStore from '@/store/modalStore';
 
 const Modal = () => {
@@ -12,7 +12,7 @@ const Modal = () => {
       {isOpenModal && (
         <ModalWrapper>
           <StyledModal data-testid="modal">
-            <AuthTheme />
+            <SelectTheme />
           </StyledModal>
         </ModalWrapper>
       )}
