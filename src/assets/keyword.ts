@@ -9,7 +9,7 @@ export const Theme = [
   },
 ];
 
-export const Auth_Tabs = [
+export const AuthTheme = [
   {
     id: 1,
     label: '로그인',

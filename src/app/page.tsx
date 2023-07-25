@@ -7,11 +7,13 @@ export const metadata: Metadata = {
   description: 'welcome to bloggy',
 };
 
-export default function Home() {
+const Home = () => {
   return (
     <>
       <SelectContainer />
       <Main />
     </>
   );
-}
+};
+
+export default Home;
