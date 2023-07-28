@@ -20,7 +20,7 @@ export const StyledImgSettingContainer = styled.div`
 `;
 
 export const StyledImgErrorContainer = styled.div`
-display: flex;
-justify-content: center;
-align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;

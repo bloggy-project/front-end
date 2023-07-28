@@ -65,5 +65,15 @@ export const blognameFormSchema = yup.object().shape({
 });
 
 export const descriptionFormSchema = yup.object().shape({
-  newDescription: yup.string().max(30, '30자 이하로 입력해 주세요.'),
+  newDescription: yup.string().max(40, '40자 이하로 입력해 주세요.'),
+});
+
+export const emailFormSchema = yup.object().shape({
+  newEmail: yup
+    .string()
+    .required('이메일을 입력해주세요.')
+    .matches(
+      /^[a-zA-Z0-9+-_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
+      '이메일 형식에 일치하지 않습니다.',
+    ),
 });
