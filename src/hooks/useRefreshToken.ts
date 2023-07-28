@@ -4,11 +4,10 @@ import authStore from '@/store/authStore';
 import { shallow } from 'zustand/shallow';
 import { apiPrivate } from '@/lib/api/config';
 import { getTokenByRefresh } from '@/lib/api/token';
-import { getUserInfo } from '@/lib/api/userinfo';
 import { StatusToken } from '@/assets/status';
 
 const useRefreshToken = () => {
-  const { accessToken, setAccessToken, setUserInfo } = authStore(
+  const { accessToken, setAccessToken } = authStore(
     (state) => ({
       accessToken: state.accessToken,
       setAccessToken: state.setAccessToken,
@@ -23,10 +22,6 @@ const useRefreshToken = () => {
     try {
       newAccessToken = await getTokenByRefresh();
       setAccessToken(newAccessToken);
-      // if (newAccessToken) {
-      //   const userInfo = await getUserInfo();
-      //   setUserInfo(userInfo);
-      // }
     } catch (err) {
       //액세스 토큰 발급 실패에 따라 상태 업데이트
       setAccessToken(StatusToken.No_token);
@@ -34,6 +29,17 @@ const useRefreshToken = () => {
   }, []);
 
   useEffect(() => {
+    const responseIntercept = apiPrivate.interceptors.response.use(
+      (response) => {
+        //만약 응답받은 데이터에서 accessToken키가 있으면 전역 변수 설정
+        if (response.data && response.data.accessToken) {
+          setAccessToken(response.data.accessToken);
+        }
+
+        return response;
+      },
+    );
+
     const requestIntercept = apiPrivate.interceptors.request.use(
       async (config) => {
         if (newAccessToken && config.headers) {
@@ -43,17 +49,6 @@ const useRefreshToken = () => {
       },
       (error) => {
         return Promise.reject(error);
-      },
-    );
-
-    const responseIntercept = apiPrivate.interceptors.response.use(
-      (response) => {
-        //만약 응답받은 데이터에서 accessToken키가 있으면 전역 변수 설정
-        if (response.data && response.data.accessToken) {
-          setAccessToken(response.data.accessToken);
-        }
-
-        return response;
       },
     );
 
