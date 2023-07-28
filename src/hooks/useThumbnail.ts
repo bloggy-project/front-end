@@ -1,8 +1,8 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
-const useThumbnail = (img: string | null) => {
+const useThumbnail = (img: string | null | undefined) => {
   const default_thumbnail = '/default_thumbnail.png';
-  const checkThumbnail = (img: string | null): string => {
+  const checkThumbnail = (img: string | null | undefined): string => {
     if (!img) {
       return default_thumbnail;
     }
@@ -10,7 +10,6 @@ const useThumbnail = (img: string | null) => {
   };
 
   const [thumbnailImg, setThumbnailImg] = useState(checkThumbnail(img));
-
   const setDefaultImg = () => {
     setThumbnailImg(default_thumbnail);
   };

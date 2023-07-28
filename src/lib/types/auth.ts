@@ -19,6 +19,6 @@ export type UserInfo = {
   thumbnail: null | string;
   name: string;
   email: string;
-  blogname: null | string;
+  blogName: null | string;
   description: null | string;
 };

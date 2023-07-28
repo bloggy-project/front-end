@@ -2,7 +2,6 @@
 import {
   StyledSingleFormContainer,
   StyledSingleForm,
-  StyledErrMsg,
 } from '@/components/Form/Form-Styled';
 import { StyledThumbnailContainer } from '@/components/Thumbnail/UserThumbnail-Styled';
 import useThumbnail from '@/hooks/useThumbnail';
@@ -10,19 +9,18 @@ import Image from 'next/image';
 import {
   StyledImgSettingBtn,
   StyledImgSettingContainer,
-  StyledImgErrorContainer,
 } from './ThumbSetting-Styled';
 import { IoSettingsOutline } from 'react-icons/io5';
 import useToggle from '@/hooks/useToggle';
 import { useRef } from 'react';
 import ThumbMenu from './ThumbMenu';
+import { UserInfo } from '@/lib/types/auth';
 
 type ThumbSettingProps = {
-  thumbnail: string | null;
-  name: string;
+  thumbnail: UserInfo['thumbnail'];
 };
 
-const ThumbSetting = ({ thumbnail, name }: ThumbSettingProps) => {
+const ThumbSetting = ({ thumbnail }: ThumbSettingProps) => {
   const { thumbnailImg, setThumbImg, setDefaultImg } = useThumbnail(thumbnail);
   const menuRef = useRef<HTMLUListElement>(null);
   const { isOpen, onChangeOpen } = useToggle(menuRef);
@@ -31,7 +29,7 @@ const ThumbSetting = ({ thumbnail, name }: ThumbSettingProps) => {
       <StyledSingleForm>
         <StyledImgSettingContainer>
           <StyledThumbnailContainer size="big">
-            <Image src={thumbnailImg} alt={name} fill />
+            <Image src={thumbnailImg} alt={thumbnailImg} fill />
           </StyledThumbnailContainer>
           <StyledImgSettingBtn type="button" onClick={onChangeOpen}>
             <IoSettingsOutline />
@@ -44,9 +42,6 @@ const ThumbSetting = ({ thumbnail, name }: ThumbSettingProps) => {
             />
           )}
         </StyledImgSettingContainer>
-        <StyledImgErrorContainer>
-          <StyledErrMsg>ㅁㅁ</StyledErrMsg>
-        </StyledImgErrorContainer>
       </StyledSingleForm>
     </StyledSingleFormContainer>
   );

@@ -12,7 +12,7 @@ export type UserInfo = {
 type authState = {
   accessToken: string | null;
   userInfo: UserInfo;
-  setAccessToken: (value: string) => void;
+  setAccessToken: (value: string | null) => void;
   setUserInfo: (value: UserInfo) => void;
 };
 

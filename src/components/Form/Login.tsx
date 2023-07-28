@@ -12,9 +12,10 @@ import { Palette } from '@/assets/color';
 import { onLogin } from '@/lib/api/auth';
 import { loginProps } from '@/lib/types/auth';
 import modalStore from '@/store/modalStore';
-import authStore from '@/store/authStore';
+import authStore, { UserInfo } from '@/store/authStore';
 import { shallow } from 'zustand/shallow';
 import { MsgAlert, MsgPlaceholder } from '@/assets/message';
+import MyLocalStorage from '@/lib/handler/handleLocalStorage';
 
 const Login = () => {
   const {
@@ -28,17 +29,17 @@ const Login = () => {
   });
   const setToggleModal = modalStore((state) => state.setToggleModal);
 
-  const { setUserInfo } = authStore(
-    (state) => ({
-      setAccessToken: state.setAccessToken,
-      setUserInfo: state.setUserInfo,
-    }),
-    shallow,
-  );
+  // const { setUserInfo } = authStore(
+  //   (state) => ({
+  //     setAccessToken: state.setAccessToken,
+  //     setUserInfo: state.setUserInfo,
+  //   }),
+  //   shallow,
+  // );
   const submitLogin = async ({ email, password }: loginProps) => {
     try {
       const userInfo = await onLogin(email, password);
-      setUserInfo(userInfo);
+      // new MyLocalStorage<UserInfo>('userInfo').set(userInfo);
       reset();
       setToggleModal();
       alert(MsgAlert.Login.success);

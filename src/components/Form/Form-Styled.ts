@@ -1,10 +1,6 @@
 import styled, { css } from 'styled-components';
 import { Palette } from '@/assets/color';
 
-type StyledSingleFormProps = {
-  flexible?: 'flex';
-};
-
 type CombInputProps = {
   combbtntext?: string;
 };
@@ -68,7 +64,7 @@ export const StyledCombInput = styled(StyledInput)<CombInputProps>`
 
 export const StyledCombTextarea = styled.textarea<CombInputProps>`
   ${(props) => getSize(props)}
-  height: 7rem;
+  height: 6rem;
   border: 1px solid gray;
   border-radius: 10px;
   resize: none;
