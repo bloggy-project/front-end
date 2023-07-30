@@ -22,4 +22,7 @@ export const MsgAlert = {
   Userinfo: {
     notExist: '해당 유저가 존재하지 않습니다. 다시 한 번 시도해주세요',
   },
+  AWS: {
+    failUpload: '파일 업로드에 실패했습니다. 재로그인 후 이용해주세요',
+  },
 };
