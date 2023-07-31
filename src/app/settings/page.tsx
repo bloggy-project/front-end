@@ -6,7 +6,7 @@ import { notFound } from 'next/navigation';
 
 const PageSettings = () => {
   const accessToken = authStore((state) => state.accessToken);
-  if (accessToken === StatusToken.Initial || StatusToken.No_token) {
+  if (accessToken === (StatusToken.Initial || StatusToken.No_token)) {
     notFound();
   } else {
     return <Settings />;

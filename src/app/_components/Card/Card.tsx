@@ -1,4 +1,4 @@
-import useGetUserProfileList from '@/query/search/useGetRecentPages';
+import useGetInfinitePages from '@/query/search/useGetInfinitePages';
 import { StyledCard } from './Card-Styled';
 import Content from '../CardContent/Content';
 import { useInView } from 'react-intersection-observer';
@@ -20,7 +20,7 @@ const Card = ({ theme, optionTheme, option }: CardProps) => {
     hasNextPage,
     isLoading,
     isFetchingNextPage,
-  } = useGetUserProfileList(optionTheme, option);
+  } = useGetInfinitePages(optionTheme, option);
 
   const hasNoContent = pageDatas?.some((data) => data.content.length < 1);
 

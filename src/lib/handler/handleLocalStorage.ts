@@ -8,7 +8,7 @@ export default class MyLocalStorage<T> {
     this.handleErr =
       handleErr ||
       (() => {
-        console.log('localStorage에 값이 존재하지 않습니다');
+        return;
       });
   }
 

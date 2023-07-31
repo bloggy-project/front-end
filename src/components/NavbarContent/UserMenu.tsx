@@ -14,7 +14,7 @@ const UserMenu = () => {
   const menu = [
     { name: '내 블로그', value: storageData?.name },
     { name: '설정', value: 'settings' },
-    { name: '로그아웃', value: '', onClick: () => console.log(1212) },
+    { name: '로그아웃', value: '', onClick: () => console.log() },
   ];
 
   return (
