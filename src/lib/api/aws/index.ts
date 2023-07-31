@@ -15,7 +15,7 @@ export const uploadImg = async (presignedUrl: string, file: File) => {
     });
   } catch (err) {
     if (err instanceof Error) {
-      throw Error(MsgAlert.AWS.failUpload);
+      throw Error(MsgAlert.File.failUploadS3);
     }
   }
 };

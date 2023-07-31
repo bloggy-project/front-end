@@ -1,4 +1,5 @@
 import { MsgAlert } from '@/assets/message';
+import { MaxFileSizeMB } from '@/assets/size';
 
 export const handleImgFile = (
   fileList: FileList | null,
@@ -7,24 +8,23 @@ export const handleImgFile = (
   if (fileList?.length) {
     let imgFile: File | null = null;
 
-    // Iterate through each file in the fileList
     Array.from(fileList).forEach((file) => {
-      // Get the file type using the MIME type or extension
       const fileType = file.type || file.name.split('.').pop()?.toLowerCase();
 
-      // Check if the file type is an image
       if (fileType?.startsWith('image/')) {
-        // File is an image
+        const fileSizeMB = file.size / (1024 * 1024);
+        if (fileSizeMB > MaxFileSizeMB) {
+          throw new Error(MsgAlert.File.exceededImgSize);
+        }
         setImgFile(URL.createObjectURL(file));
         imgFile = file;
       } else {
-        // File is not an image
-        throw new Error(MsgAlert.notImgFile);
+        throw new Error(MsgAlert.File.notImgFile);
       }
     });
 
     return imgFile;
   }
 
-  return null; // Return null if no files are provided in fileList
+  return null;
 };
