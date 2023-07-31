@@ -1,3 +1,5 @@
+import { MaxFileSizeMB } from './size';
+
 export const MsgPlaceholder = {
   email: '이메일을 입력해 주세요',
   password: '비밀번호를 입력해 주세요',
@@ -8,7 +10,6 @@ export const MsgPlaceholder = {
 };
 
 export const MsgAlert = {
-  notImgFile: '이미지 파일을 등록해 주세요',
   Login: {
     success: '로그인에 성공하였습니다.',
     fail: '로그인에 실패하였습니다. 다시 한 번 확인해 주세요.',
@@ -22,7 +23,9 @@ export const MsgAlert = {
   Userinfo: {
     notExist: '해당 유저가 존재하지 않습니다. 다시 한 번 시도해주세요',
   },
-  AWS: {
-    failUpload: '파일 업로드에 실패했습니다. 재로그인 후 이용해주세요',
+  File: {
+    failUploadS3: '파일 업로드에 실패했습니다. 재로그인 후 이용해주세요',
+    notImgFile: '이미지 파일을 등록해 주세요',
+    exceededImgSize: `${MaxFileSizeMB}MB 이하의 이미지를 등록해 주세요`,
   },
 };
