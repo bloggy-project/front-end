@@ -50,8 +50,8 @@ const EmailSetting = ({ email }: EmailSettingProps) => {
     }
   };
   return (
-    <StyledSingleFormContainer onSubmit={handleSubmit(submitEmail)}>
-      <StyledSingleForm>
+    <StyledSingleFormContainer>
+      <StyledSingleForm onSubmit={handleSubmit(submitEmail)}>
         <StyledLabel htmlFor="email">이메일</StyledLabel>
         <StyledIconInputContainer>
           <StyledCombInput
