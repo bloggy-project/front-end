@@ -14,6 +14,8 @@ yarn install
 #npm7 버전부터 peerDependencies를 자동으로 설치하게 되는데, 이때 이미 설치되어 있는 의존성과 동일하지만 버전이 다른 peerDependencies가 존재하고 있으면 충돌이 발생한다.
 #--legacy-peer-deps를 통해 peerDependencies를 무시하고 설치하도록 한다.
 
+COPY .env.local .env
+
 COPY . .
 #소스파일들을 복사한다. 첫 번째 인자로 복사할 파일들 지정, 두 번째 인자로 복사위치 지정. 여기서는 모든 파일들을 WORKDIR로 복사. 
 
