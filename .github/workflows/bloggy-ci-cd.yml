@@ -22,8 +22,11 @@ jobs:
           node-version: 16.17.0
       - name: Create env file
         run: |
-           touch .env
-           echo "${{ secrets.ENV_VALUE }}" > .env
+          touch .env.production
+          echo NEXT_PUBLIC_SERVER_URL=${{secrets.ENV_VALUE_SERVER_URL}} >> .env.production
+          echo NEXT_PUBLIC_S3_URL=${{secrets.ENV_VALUE_S3_URL}} >> .env.production
+          echo NEXT_PUBLIC_CDN_URL=${{secrets.ENV_VALUE_CDN_URL}} >> .env.production
+          echo NEXT_PUBLIC_CDN_DOMAIN=${{secrets.ENV_VALUE_CDN_DOMAIN}} >> .env.production
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
       - name: Login to Docker Hub
