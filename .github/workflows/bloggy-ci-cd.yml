@@ -21,7 +21,9 @@ jobs:
         with:
           node-version: 16.17.0
       - name: Create env file
-        run:  echo "${{ secrets.ENV_VALUE }}" > .env.local
+        run: |
+           touch .env
+           echo "${{ secrets.ENV_VALUE }}" > .env
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
       - name: Login to Docker Hub
