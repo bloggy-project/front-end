@@ -13,22 +13,19 @@ jobs:
     env:
       Container: bloggy-front
       Image: ${{ secrets.DOCKERHUB_NICKNAME }}/bloggy:latest
-      Api: ${{ secrets.ENV_VALUE }}
     steps:
       - name: Checkout source code
         uses: actions/checkout@v3
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
       - name: Create env file
         run: touch .env.production
       - name: Set env file
-        run: echo "${{ env.Api }}" > .env.production
-      - name: Verify env file content
-        run: cat .env.production
+        run: echo "${{ secrets.ENV_VALUE }}" > .env.production
       - uses: actions/upload-artifact@v2 #위에서 생성한 .env파일을 디렉토리에 집어넣기
         with:
           name: .env.production
           path: ./.env.production
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
       - name: Login to Docker Hub
         uses: docker/login-action@v2
         with:
