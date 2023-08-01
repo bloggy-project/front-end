@@ -20,6 +20,8 @@ jobs:
         run: touch .env.production
       - name: Set env file
         run: echo "${{ secrets.ENV_VALUE }}" > .env.production
+      - name: Verify .env.production
+        run: cat .env.production
       - uses: actions/upload-artifact@v2 #위에서 생성한 .env파일을 디렉토리에 집어넣기
         with:
           name: .env.production
