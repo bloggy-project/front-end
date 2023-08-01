@@ -18,7 +18,7 @@ jobs:
         uses: actions/checkout@v3
       - name: Create env file
         run: |
-         echo "NEXT_PUBLIC_API_URL=${{ secrets.NEXT_PUBLIC_API_URL }}" > .env
+          echo "${{ secrets.ENV_VALUE }}" > .env.production
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
       - name: Login to Docker Hub
@@ -59,7 +59,7 @@ jobs:
              echo "Error: Failed to pull the image"
             fi
 
-            if docker run --rm --name "${{ env.Container }}" -dp 80:3000 "${{ env.Image }}"; then
+            if docker run --rm --name "${{ env.Container }}" -dp 3000:3000 "${{ env.Image }}"; then
              echo "Container created and run successfully"
             else
              echo "Error: Failed to run the container"
