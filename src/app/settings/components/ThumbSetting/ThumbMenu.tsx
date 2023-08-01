@@ -9,6 +9,7 @@ import { handleImgFile } from '@/lib/handler/handleImgFile';
 import { getPreSignedUrl, uploadImg } from '@/lib/api/aws';
 import handleCdnPath from '@/lib/handler/handleCdnPath';
 import useChangeUserInfo from '@/query/userinfo/useChangeUserInfo';
+import useDisable from '@/hooks/useDisable';
 
 type ThumbMenuProps = {
   setThumbnailImg: (img: string) => void;
@@ -21,9 +22,11 @@ const ThumbMenu = forwardRef<HTMLUListElement, ThumbMenuProps>(
     ref,
   ) {
     const changeUserInfo = useChangeUserInfo();
+    const { isDisable, onDisable, notDisable } = useDisable();
     const onChangeFile = async (event: ChangeEvent<HTMLInputElement>) => {
       event.preventDefault();
       try {
+        onDisable();
         const fileList = event.target.files;
         const imgFile = handleImgFile(fileList, setThumbnailImg);
         if (imgFile) {
@@ -36,6 +39,8 @@ const ThumbMenu = forwardRef<HTMLUListElement, ThumbMenuProps>(
         if (err instanceof Error) {
           alert(err.message);
         }
+      } finally {
+        notDisable();
       }
     };
 
@@ -53,8 +58,11 @@ const ThumbMenu = forwardRef<HTMLUListElement, ThumbMenuProps>(
             accept="image/*"
             id="imageFile"
             onChange={onChangeFile}
+            disabled={isDisable}
           />
-          <StyledLabel htmlFor="imageFile">이미지 수정</StyledLabel>
+          <StyledLabel htmlFor="imageFile">
+            {isDisable ? '수정 중...' : '이미지 수정'}
+          </StyledLabel>
         </StyledLi>
         <StyledLi onClick={onChangeDefaultImg}>기본 이미지</StyledLi>
       </StyledThumbMenu>
