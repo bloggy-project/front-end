@@ -3,8 +3,6 @@ FROM node:16.17.0-alpine
 WORKDIR /app
 #WORKDIR은 cd를 의미. /app 디렉토리로 이미지를 복사해올 것을 지정
 
-COPY .env.local .env
-
 COPY package.json .
 #COPY를 통해 /app에 파일을 복사한다. 빈번이 작성되는 것을 후순위에서 복사한다. package.json을 먼저 복사하도록 하자
 #COPY package.json package-lock.json ./

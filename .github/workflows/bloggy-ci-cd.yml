@@ -16,8 +16,12 @@ jobs:
     steps:
       - name: Checkout source code
         uses: actions/checkout@v3
+      - name: Set node-version 16.17.0
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16.17.0
       - name: Create env file
-        run:  echo "${{ secrets.ENV_VALUE }}" > ./.env.local
+        run:  echo "${{ secrets.ENV_VALUE }}" > .env.local
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
       - name: Login to Docker Hub
