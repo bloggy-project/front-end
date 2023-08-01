@@ -11,16 +11,13 @@ const useRefreshToken = () => {
     (state) => ({
       accessToken: state.accessToken,
       setAccessToken: state.setAccessToken,
-      setUserInfo: state.setUserInfo,
     }),
     shallow,
   );
 
-  let newAccessToken: string | null = null;
-
-  const resetLoginedUserInfo = useCallback(async () => {
+  const resetAccessToken = useCallback(async () => {
     try {
-      newAccessToken = await getTokenByRefresh();
+      const newAccessToken = await getTokenByRefresh();
       setAccessToken(newAccessToken);
     } catch (err) {
       //액세스 토큰 발급 실패에 따라 상태 업데이트
@@ -29,6 +26,7 @@ const useRefreshToken = () => {
   }, []);
 
   useEffect(() => {
+    let requestIntercept = apiPrivate.interceptors.request.use();
     const responseIntercept = apiPrivate.interceptors.response.use(
       (response) => {
         //만약 응답받은 데이터에서 accessToken키가 있으면 전역 변수 설정
@@ -40,43 +38,32 @@ const useRefreshToken = () => {
       },
     );
 
-    const requestIntercept = apiPrivate.interceptors.request.use(
-      async (config) => {
-        if (newAccessToken && config.headers) {
-          config.headers.Authorization = `Bearer ${newAccessToken}`;
-        }
-        return config;
-      },
-      (error) => {
-        return Promise.reject(error);
-      },
-    );
-
-    //액세스 토큰 재발급 후 user정보 업데이트
-    if (!accessToken) {
-      resetLoginedUserInfo();
+    if (
+      accessToken !== StatusToken.No_token &&
+      accessToken !== StatusToken.Initial
+    ) {
+      requestIntercept = apiPrivate.interceptors.request.use(
+        async (config) => {
+          if (accessToken && config.headers) {
+            config.headers.Authorization = `Bearer ${accessToken}`;
+          }
+          return config;
+        },
+        (error) => {
+          return Promise.reject(error);
+        },
+      );
+    } else if (!accessToken) {
+      resetAccessToken();
     }
 
     return () => {
       apiPrivate.interceptors.request.eject(requestIntercept);
       apiPrivate.interceptors.request.eject(responseIntercept);
     };
-  }, []);
+  }, [accessToken]);
 
   return accessToken;
 };
 
 export default useRefreshToken;
-
-// async (error: AxiosError) => {
-//   if ((error?.response?.status as number) >= 400) {
-//     try {
-//       newAccessToken = await getTokenByRefresh();
-//       setAccessToken(newAccessToken);
-//     } catch (err) {
-//       alert('다시 시도해 주세요');
-//       return;
-//     }
-//   }
-//   return Promise.reject(error);
-// },
