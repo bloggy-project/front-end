@@ -11,7 +11,7 @@ import { MsgPlaceholder } from '@/assets/message';
 import Button from '@/components/Button/Button';
 import { Palette } from '@/assets/color';
 import { useForm } from 'react-hook-form';
-import { nameFormSchema } from '@/lib/validation/schame';
+import { nameFormSchema } from '@/lib/validation/userInfoSchema';
 import { yupResolver } from '@hookform/resolvers/yup';
 import useChangeUserInfo from '@/query/userinfo/useChangeUserInfo';
 import { handleCompareTwice } from '@/lib/handler/handleCompare';

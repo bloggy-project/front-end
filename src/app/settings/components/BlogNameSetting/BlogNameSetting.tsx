@@ -10,7 +10,7 @@ import { MsgPlaceholder } from '@/assets/message';
 import Button from '@/components/Button/Button';
 import { Palette } from '@/assets/color';
 import { useForm } from 'react-hook-form';
-import { blognameFormSchema } from '@/lib/validation/schame';
+import { blognameFormSchema } from '@/lib/validation/userInfoSchema';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { handleCompareTwice } from '@/lib/handler/handleCompare';
 import useChangeUserInfo from '@/query/userinfo/useChangeUserInfo';
