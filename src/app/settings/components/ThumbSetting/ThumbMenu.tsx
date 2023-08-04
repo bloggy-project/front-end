@@ -5,7 +5,7 @@ import {
   StyledInput,
   StyledLabel,
 } from './ThumbMenu-Styled';
-import { handleImgFile } from '@/lib/handler/handleImgFile';
+import { handleImgFilist } from '@/lib/handler/handleImgFile';
 import { getPreSignedUrl, uploadImg } from '@/lib/api/aws';
 import handleCdnPath from '@/lib/handler/handleCdnPath';
 import useChangeUserInfo from '@/query/userinfo/useChangeUserInfo';
@@ -28,7 +28,7 @@ const ThumbMenu = forwardRef<HTMLUListElement, ThumbMenuProps>(
       try {
         onDisable();
         const fileList = event.target.files;
-        const imgFile = handleImgFile(fileList, setThumbnailImg);
+        const imgFile = handleImgFilist(fileList, setThumbnailImg);
         if (imgFile) {
           const presignedUrl = await getPreSignedUrl(imgFile.name);
           await uploadImg(presignedUrl, imgFile);
