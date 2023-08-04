@@ -6,7 +6,7 @@ export const getPreSignedUrl = async (fileName: string) => {
   return data;
 };
 
-export const uploadImg = async (presignedUrl: string, file: File) => {
+export const uploadImg = async (presignedUrl: string, file: File | Blob) => {
   try {
     await api.put(presignedUrl, file, {
       headers: {
