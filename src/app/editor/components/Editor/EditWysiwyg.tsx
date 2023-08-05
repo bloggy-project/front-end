@@ -13,9 +13,12 @@ import handleCdnPath from '@/lib/handler/handleCdnPath';
 import imgListStore from '@/store/imgListStore';
 import { shallow } from 'zustand/shallow';
 import { handleImgFile } from '@/lib/handler/handleImgFile';
+import { handleErrorAlert } from '@/lib/handler/handleError';
+import useWindowResize from '@/hooks/useWindowResize';
+import { StyledEditorcontainer } from './EditWysiwyg-Styled';
 
 type EditWysiwygProps = {
-  initialContent: string | null;
+  initialContent?: string | null;
   editorRef: RefObject<Editor>;
 };
 
@@ -35,6 +38,8 @@ const EditWysiwyg = ({ initialContent, editorRef }: EditWysiwygProps) => {
     shallow,
   );
 
+  const innerWidth = useWindowResize();
+
   useEffect(() => {
     clearImgList();
   }, []);
@@ -51,19 +56,17 @@ const EditWysiwyg = ({ initialContent, editorRef }: EditWysiwygProps) => {
       setImg(postImgUrl, imgFile.name);
       addImgList(postImgUrl);
     } catch (err) {
-      if (err instanceof Error) {
-        alert(err.message);
-      }
+      handleErrorAlert(err);
     }
   };
 
   return (
-    <div>
+    <StyledEditorcontainer>
       <Editor
         ref={editorRef}
-        previewStyle={0 ? 'vertical' : 'tab'}
+        previewStyle={innerWidth < 900 ? 'tab' : 'vertical'}
         placeholder={'내용을 입력해 주세요'}
-        height="calc(100vh - 5rem)"
+        height="calc(100vh - 25rem)"
         initialEditType="markdown"
         usageStatistics={false}
         useCommandShortcut={true}
@@ -72,7 +75,7 @@ const EditWysiwyg = ({ initialContent, editorRef }: EditWysiwygProps) => {
         hooks={{ addImageBlobHook: uploadImgUrl }}
         plugins={[colorSyntax, [codeSyntaxHighlight, { highlighter: Prism }]]}
       />
-    </div>
+    </StyledEditorcontainer>
   );
 };
 
