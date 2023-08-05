@@ -13,6 +13,7 @@ const UserMenu = () => {
   const storageData = useLocalStorage<UserInfo>(StorageName);
   const menu = [
     { name: '내 블로그', value: storageData?.name },
+    { name: '게시글 작성', value: 'editor' },
     { name: '설정', value: 'settings' },
     { name: '로그아웃', value: '', onClick: () => console.log() },
   ];

@@ -4,7 +4,6 @@ import NavbarButton from './NavbarButton';
 import useRefreshToken from '../../hooks/useRefreshToken';
 import modalStore from '@/store/modalStore';
 import useScrollOverflow from '@/hooks/useScrollOverflow';
-import useGetUserInfo from '@/query/userinfo/useGetUserInfo';
 
 const Navbar = () => {
   const accessToken = useRefreshToken();

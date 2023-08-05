@@ -2,7 +2,6 @@
 
 import { StyledMain } from './Main-Styled';
 import Card from '../Card/Card';
-import { Theme } from '@/assets/keyword';
 import selectKeywordStore from '@/store/selectKeywordStore';
 import { shallow } from 'zustand/shallow';
 
