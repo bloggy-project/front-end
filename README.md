@@ -53,13 +53,29 @@
 
 </details>
 
-- [ ] 썸네일, 블로그 이미지 관리
+- [x] 썸네일, 블로그 이미지 관리
   <details>
   <summary>더보기</summary>
 
   1. **PreSignedUrl 발급 후 클라이언트 단에서 S3에 이미지 파일 업로드**
   2. **AWS S3에 등록된 이미지는 CloudFront를 통해 캐싱 처리**
      - Lambda를 이용해 cdn url에 쿼리 파라미터 추가 시 원본 이미지 사이즈 최적화
+
+</details>
+
+</details>
+
+- [x] 포스트 업로드
+  <details>
+  <summary>더보기</summary>
+
+  1. **toast ui editor 라이브러리 적용 및 마이그레이션**
+  ![포스트-이미지-업로드](https://github.com/planit-works/front-end/assets/88307030/2ab9fba3-5b31-490f-93a4-808c4a7b5847)
+     - 기존 이미지 업로드 방식 base64 -> url 형식으로 변환
+     - 업로드 파일에 대한 유효성 검증
+  2. **포스트 업로드 전 미리보기용 정보 설정**
+  ![포스트 미리보기 설정](https://github.com/planit-works/front-end/assets/88307030/56edafd4-9c02-4804-8a96-56a92e031d0f)
+
 
 </details>
 
