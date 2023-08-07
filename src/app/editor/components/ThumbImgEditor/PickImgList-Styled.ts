@@ -1,6 +1,4 @@
-import { Palette } from '@/assets/color';
-import { Layout } from '@/assets/size';
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
 
 export const StyledPickImgList = styled.div`
   width: 100%;
