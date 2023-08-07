@@ -10,11 +10,12 @@ import { MsgPlaceholder } from '@/assets/message';
 import Button from '@/components/Button/Button';
 import { Palette } from '@/assets/color';
 import { useForm } from 'react-hook-form';
-import { descriptionFormSchema } from '@/lib/validation/schame';
+import { descriptionFormSchema } from '@/lib/validation/userInfoSchema';
 import { yupResolver } from '@hookform/resolvers/yup';
 import useChangeUserInfo from '@/query/userinfo/useChangeUserInfo';
 import { handleCompareTwice } from '@/lib/handler/handleCompare';
 import { UserInfo } from '@/lib/types/auth';
+import { handleErrorAlert } from '@/lib/handler/handleError';
 
 type DescriptionSettingProps = {
   description: UserInfo['description'] | undefined;
@@ -46,7 +47,7 @@ const DescriptionSetting = ({ description }: DescriptionSettingProps) => {
       handleCompareTwice(description, newDescription);
       changeUserInfo.mutate({ description: newDescription });
     } catch (err) {
-      return;
+      handleErrorAlert(err);
     }
   };
 
@@ -57,6 +58,7 @@ const DescriptionSetting = ({ description }: DescriptionSettingProps) => {
         <StyledTextareaContainer>
           <StyledCombTextarea
             id="description"
+            height="6rem"
             placeholder={MsgPlaceholder.description}
             combbtntext="수정"
             {...register('newDescription')}

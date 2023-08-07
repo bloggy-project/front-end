@@ -5,10 +5,12 @@ import {
   StyledInput,
   StyledLabel,
 } from './ThumbMenu-Styled';
-import { handleImgFile } from '@/lib/handler/handleImgFile';
+import { handleImgFilist } from '@/lib/handler/handleImgFile';
 import { getPreSignedUrl, uploadImg } from '@/lib/api/aws';
 import handleCdnPath from '@/lib/handler/handleCdnPath';
 import useChangeUserInfo from '@/query/userinfo/useChangeUserInfo';
+import useDisable from '@/hooks/useDisable';
+import { handleErrorAlert } from '@/lib/handler/handleError';
 
 type ThumbMenuProps = {
   setThumbnailImg: (img: string) => void;
@@ -21,11 +23,13 @@ const ThumbMenu = forwardRef<HTMLUListElement, ThumbMenuProps>(
     ref,
   ) {
     const changeUserInfo = useChangeUserInfo();
+    const { isDisable, onDisable, notDisable } = useDisable();
     const onChangeFile = async (event: ChangeEvent<HTMLInputElement>) => {
       event.preventDefault();
       try {
+        onDisable();
         const fileList = event.target.files;
-        const imgFile = handleImgFile(fileList, setThumbnailImg);
+        const imgFile = handleImgFilist(fileList, setThumbnailImg);
         if (imgFile) {
           const presignedUrl = await getPreSignedUrl(imgFile.name);
           await uploadImg(presignedUrl, imgFile);
@@ -33,9 +37,9 @@ const ThumbMenu = forwardRef<HTMLUListElement, ThumbMenuProps>(
           changeUserInfo.mutate({ thumbnail: thumbImgUrl });
         }
       } catch (err) {
-        if (err instanceof Error) {
-          alert(err.message);
-        }
+        handleErrorAlert(err);
+      } finally {
+        notDisable();
       }
     };
 
@@ -53,8 +57,11 @@ const ThumbMenu = forwardRef<HTMLUListElement, ThumbMenuProps>(
             accept="image/*"
             id="imageFile"
             onChange={onChangeFile}
+            disabled={isDisable}
           />
-          <StyledLabel htmlFor="imageFile">이미지 수정</StyledLabel>
+          <StyledLabel htmlFor="imageFile">
+            {isDisable ? '수정 중...' : '이미지 수정'}
+          </StyledLabel>
         </StyledLi>
         <StyledLi onClick={onChangeDefaultImg}>기본 이미지</StyledLi>
       </StyledThumbMenu>

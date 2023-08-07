@@ -1,6 +1,5 @@
 import {
   StyledLabel,
-  StyledInput,
   StyledSingleFormContainer,
   StyledSingleForm,
   StyledIconInputContainer,
@@ -8,15 +7,15 @@ import {
   StyledErrMsg,
 } from '@/components/Form/Form-Styled';
 import { MsgPlaceholder } from '@/assets/message';
-import { AiFillLock } from 'react-icons/ai';
 import { UserInfo } from '@/lib/types/auth';
 import { useForm } from 'react-hook-form';
-import { emailFormSchema } from '@/lib/validation/schame';
+import { emailFormSchema } from '@/lib/validation/userInfoSchema';
 import { yupResolver } from '@hookform/resolvers/yup';
 import useChangeUserInfo from '@/query/userinfo/useChangeUserInfo';
 import { handleCompareTwice } from '@/lib/handler/handleCompare';
 import Button from '@/components/Button/Button';
 import { Palette } from '@/assets/color';
+import { handleErrorAlert } from '@/lib/handler/handleError';
 
 type EmailSettingProps = {
   email: UserInfo['email'];
@@ -46,7 +45,7 @@ const EmailSetting = ({ email }: EmailSettingProps) => {
       handleCompareTwice(email, newEmail);
       changeUserInfo.mutate({ email: newEmail });
     } catch (err) {
-      return;
+      handleErrorAlert(err);
     }
   };
   return (

@@ -6,7 +6,7 @@ import {
   StyledInputContainer,
   StyledErrMsg,
 } from './Form-Styled';
-import { joinFormSchema, nameSchema } from '@/lib/validation/schame';
+import { joinFormSchema, nameSchema } from '@/lib/validation/authSchame';
 import Button from '../Button/Button';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';

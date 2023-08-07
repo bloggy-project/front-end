@@ -4,6 +4,7 @@ import styled from 'styled-components';
 export const StyledContent = styled.article`
   position: relative;
   display: flex;
+  justify-content: center;
   border-radius: 5%;
   width: 100%;
   flex-direction: column;

@@ -24,7 +24,7 @@ const Content = ({ data }: ContentProps) => {
     <StyledContent>
       <StyledImgContainer>
         <Image
-          src={data.thumbnail}
+          src={data.thumbnail ? data.thumbnail : '/no-image.jpg'}
           alt={data.title}
           fill
           sizes={ImageSizesProps.default}
@@ -33,7 +33,7 @@ const Content = ({ data }: ContentProps) => {
       </StyledImgContainer>
       <StyledDetails>
         <StyledDetailsH3>{data.title}</StyledDetailsH3>
-        <StyledDetailsP>{data.content}</StyledDetailsP>
+        <StyledDetailsP>{data.subContent}</StyledDetailsP>
       </StyledDetails>
 
       <StyledInfo>

@@ -4,19 +4,17 @@ import {
   StyledSingleFormContainer,
   StyledSingleForm,
   StyledErrMsg,
-  StyledCombInput,
   StyledInput,
 } from '@/components/Form/Form-Styled';
 import { MsgPlaceholder } from '@/assets/message';
-import Button from '@/components/Button/Button';
-import { Palette } from '@/assets/color';
 import { useForm } from 'react-hook-form';
-import { nameFormSchema } from '@/lib/validation/schame';
+import { nameFormSchema } from '@/lib/validation/userInfoSchema';
 import { yupResolver } from '@hookform/resolvers/yup';
 import useChangeUserInfo from '@/query/userinfo/useChangeUserInfo';
 import { handleCompareTwice } from '@/lib/handler/handleCompare';
 import { UserInfo } from '@/lib/types/auth';
 import { AiFillLock } from 'react-icons/ai';
+import { handleErrorAlert } from '@/lib/handler/handleError';
 
 type NameSettingProps = {
   name: UserInfo['name'];
@@ -28,9 +26,8 @@ type NameFormProps = {
 
 const NameSetting = ({ name }: NameSettingProps) => {
   const {
-    register,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { errors },
   } = useForm({
     resolver: yupResolver(nameFormSchema),
     mode: 'onChange',
@@ -43,7 +40,7 @@ const NameSetting = ({ name }: NameSettingProps) => {
       handleCompareTwice(name, newName);
       changeUserInfo.mutate({ name: newName });
     } catch (err) {
-      return;
+      handleErrorAlert(err);
     }
   };
 

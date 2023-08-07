@@ -13,7 +13,7 @@ export interface Pages {
 export interface Content {
   postId: number;
   title: string;
-  content: string;
+  subContent: string;
   username: string;
   createdAt: string;
   commentCount: number;
