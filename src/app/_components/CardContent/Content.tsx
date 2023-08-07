@@ -23,15 +23,13 @@ const Content = ({ data }: ContentProps) => {
   return (
     <StyledContent>
       <StyledImgContainer>
-        {data.thumbnail ? (
-          <Image
-            src={data.thumbnail}
-            alt={data.title}
-            fill
-            sizes={ImageSizesProps.default}
-            priority
-          />
-        ) : null}
+        <Image
+          src={data.thumbnail ? data.thumbnail : '/no-image.jpg'}
+          alt={data.title}
+          fill
+          sizes={ImageSizesProps.default}
+          priority
+        />
       </StyledImgContainer>
       <StyledDetails>
         <StyledDetailsH3>{data.title}</StyledDetailsH3>
