@@ -19,10 +19,6 @@ export const StyledInputTagNames = styled(StyledInputTitle)`
   font-size: 1.8rem;
 `;
 
-export const StyledLabel = styled.label`
-  font-size: 1.8rem;
-`;
-
 export const StyledBtnContainer = styled.div`
   padding: 0.5rem;
   margin-top: 1rem;

@@ -14,8 +14,13 @@ import {
   StyledEditPostContainer,
   StyledInputTagNames,
   StyledInputTitle,
-  StyledLabel,
 } from './EditPost-Styled';
+import {
+  getCheckedString,
+  convetHTMLtoString,
+} from '@/lib/handler/handleStrings';
+import Label from '@/components/Label/Label';
+import { MsgPlaceholder } from '@/assets/message';
 
 const EditPost = () => {
   const editorRef = useRef<Editor>(null);
@@ -34,18 +39,20 @@ const EditPost = () => {
   };
 
   const handOverPost = () => {
-    const title = titleRef.current?.value ? titleRef.current.value : '';
-    const tagNames = tagNamesRef.current?.value
-      ? tagNamesRef.current.value
-      : '';
-    const contentMarkdown = editorRef?.current?.getInstance().getMarkdown()
-      ? editorRef?.current?.getInstance().getMarkdown()
-      : '';
+    const title = getCheckedString(titleRef.current?.value);
+    const tagNames = getCheckedString(tagNamesRef.current?.value);
+    const contentMarkdown = getCheckedString(
+      editorRef?.current?.getInstance().getMarkdown(),
+    );
+    const contentHTML = getCheckedString(
+      editorRef?.current?.getInstance().getHTML(),
+    );
     const tagNameArr = handleTagNamesChange(tagNames);
     setPost({
       thumbnail: imgList[0],
       title,
       content: contentMarkdown,
+      subContent: convetHTMLtoString(contentHTML),
       tagNames: tagNameArr,
     });
     setToggleModalEditor();
@@ -55,16 +62,14 @@ const EditPost = () => {
     <StyledEditPostContainer>
       <StyledInputTitle
         ref={titleRef}
-        placeholder={'제목을 입력해 주세요'}
+        placeholder={MsgPlaceholder.title}
         id="title"
       />
       <div>
-        <StyledLabel htmlFor="tagNames">태그 | </StyledLabel>
+        <Label htmlfor="tagNames" content="태그 | " fontSize="1.8rem" />
         <StyledInputTagNames
           ref={tagNamesRef}
-          placeholder={
-            '2개 이상의 태그를 사용하시려면 태그 앞에 #을 붙여주세요'
-          }
+          placeholder={MsgPlaceholder.tagNames}
           id="tagNames"
           // value={tagValue}
         />
@@ -93,7 +98,6 @@ const EditPost = () => {
 };
 
 export default EditPost;
-
 // 태그네임 리팩토링 시 고려사항
 // const [tagValue, setTagValue] = useState<string>('');
 
