@@ -1,6 +1,5 @@
 import {
   StyledLabel,
-  StyledInput,
   StyledSingleFormContainer,
   StyledSingleForm,
   StyledIconInputContainer,
@@ -8,7 +7,6 @@ import {
   StyledErrMsg,
 } from '@/components/Form/Form-Styled';
 import { MsgPlaceholder } from '@/assets/message';
-import { AiFillLock } from 'react-icons/ai';
 import { UserInfo } from '@/lib/types/auth';
 import { useForm } from 'react-hook-form';
 import { emailFormSchema } from '@/lib/validation/userInfoSchema';

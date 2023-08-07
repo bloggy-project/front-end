@@ -1,4 +1,3 @@
-import { Layout } from '@/assets/size';
 import styled, { keyframes } from 'styled-components';
 
 const slideUp = keyframes`
