@@ -1,3 +1,5 @@
+'use client';
+
 import { Editor } from '@toast-ui/react-editor';
 import dynamic from 'next/dynamic';
 import { RefObject } from 'react';
