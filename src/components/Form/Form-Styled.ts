@@ -5,6 +5,10 @@ type CombInputProps = {
   combbtntext?: string;
 };
 
+type TextareaProps = {
+  height: string;
+};
+
 const getSize = ({ combbtntext }: CombInputProps) => {
   if (combbtntext) {
     const btnWidth = `${combbtntext.toLowerCase().length}rem`;
@@ -58,13 +62,9 @@ export const StyledInput = styled.input`
   }
 `;
 
-export const StyledCombInput = styled(StyledInput)<CombInputProps>`
-  ${(props) => getSize(props)}
-`;
-
-export const StyledCombTextarea = styled.textarea<CombInputProps>`
-  ${(props) => getSize(props)}
-  height: 6rem;
+export const StyledTextarea = styled.textarea<TextareaProps>`
+  width: 100%;
+  height: ${(props) => props.height};
   border: 1px solid gray;
   border-radius: 10px;
   resize: none;
@@ -75,6 +75,14 @@ export const StyledCombTextarea = styled.textarea<CombInputProps>`
     border-width: 1.5px;
     outline: none;
   }
+`;
+
+export const StyledCombInput = styled(StyledInput)<CombInputProps>`
+  ${(props) => getSize(props)}
+`;
+
+export const StyledCombTextarea = styled(StyledTextarea)<CombInputProps>`
+  ${(props) => getSize(props)}
 `;
 
 export const StyledInputContainer = styled.div`

@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 type StyledButtonProps = {
   color?: string;
   hover: 'none' | 'opacity';
-  size: 'sm' | 'md' | 'lg' | 'modal' | 'comb';
+  size: 'sm' | 'md' | 'lg' | 'modal' | 'half' | 'comb';
 };
 
 const getSize = ({ size = 'md' }) => {
@@ -29,6 +29,15 @@ const getSize = ({ size = 'md' }) => {
         padding: 0.8rem 1rem;
         width: 100%;
         border-radius: 10px;
+      `;
+    }
+    case 'half': {
+      return css`
+        font-size: 1.4rem;
+        font-weight: 600;
+        padding: 0.8rem 1rem;
+        width: 50%;
+        border-radius: 0;
       `;
     }
     case 'comb': {

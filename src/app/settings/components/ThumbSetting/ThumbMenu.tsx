@@ -10,6 +10,7 @@ import { getPreSignedUrl, uploadImg } from '@/lib/api/aws';
 import handleCdnPath from '@/lib/handler/handleCdnPath';
 import useChangeUserInfo from '@/query/userinfo/useChangeUserInfo';
 import useDisable from '@/hooks/useDisable';
+import { handleErrorAlert } from '@/lib/handler/handleError';
 
 type ThumbMenuProps = {
   setThumbnailImg: (img: string) => void;
@@ -36,9 +37,7 @@ const ThumbMenu = forwardRef<HTMLUListElement, ThumbMenuProps>(
           changeUserInfo.mutate({ thumbnail: thumbImgUrl });
         }
       } catch (err) {
-        if (err instanceof Error) {
-          alert(err.message);
-        }
+        handleErrorAlert(err);
       } finally {
         notDisable();
       }
