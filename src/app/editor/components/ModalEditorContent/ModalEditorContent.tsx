@@ -28,6 +28,7 @@ import useUploadPost from '@/query/post/useUploadPost';
 import { shallow } from 'zustand/shallow';
 import { handleErrorAlert } from '@/lib/handler/handleError';
 import { useRouter } from 'next/navigation';
+import { getCheckedString } from '@/lib/handler/handleStrings';
 
 type PostFormProps = {
   title: string;
@@ -35,7 +36,7 @@ type PostFormProps = {
 };
 
 const ModalEditorContent = () => {
-  const { post, setPost, clearPost } = postStore(
+  const { post, clearPost } = postStore(
     (state) => ({
       post: state.post,
       setPost: state.setPost,
@@ -68,8 +69,11 @@ const ModalEditorContent = () => {
 
   const submitPost = async ({ title, subContent }: PostFormProps) => {
     try {
-      setPost({ title, subContent });
-      uploadPost.mutate(post);
+      uploadPost.mutate({
+        ...post,
+        title,
+        subContent: getCheckedString(subContent),
+      });
       setToggleModalEditor();
       clearPost();
       onClicktoIndex();
