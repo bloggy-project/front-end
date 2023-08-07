@@ -1,4 +1,4 @@
-import { loginFormSchema } from '@/lib/validation/schame';
+import { loginFormSchema } from '@/lib/validation/authSchame';
 import {
   StyledFormContainer,
   StyledForm,
