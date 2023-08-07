@@ -22,6 +22,7 @@ const postStore = create<postState>()(
         post: {
           ...state.post,
           ...value,
+          thumbnail: value.thumbnail ? `${value.thumbnail}?w=480&h=336` : '',
         },
       })),
     clearPost: () =>
