@@ -1,11 +1,10 @@
 'use client';
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import EditNoSSR from '../EditMode/EditNoSSR';
 import { Editor } from '@toast-ui/react-editor';
 import Button from '@/components/Button/Button';
 import { Palette } from '@/assets/color';
-import { handleTagNamesChange } from '@/lib/handler/handleTagNames';
-import imgListStore from '@/store/imgListStore';
+import imageListStore from '@/store/imageListStore';
 import modalStore from '@/store/modalStore';
 import postStore from '@/store/postStore';
 import { useRouter } from 'next/navigation';
@@ -15,45 +14,65 @@ import {
   StyledInputTagNames,
   StyledInputTitle,
 } from './EditPost-Styled';
-import {
-  getCheckedString,
-  convetHTMLtoString,
-} from '@/lib/handler/handleStrings';
 import Label from '@/components/Label/Label';
+import handleGetEditorData from '@/lib/handler/handleGetEditorData';
+import {
+  setLocalStorage,
+  getLocalStorage,
+} from '@/lib/handler/handleLocalStorage';
+import { TempPost } from '@/lib/types/post';
+import { Name } from '@/assets/storage';
 import { MsgPlaceholder } from '@/assets/message';
 
 const EditPost = () => {
   const editorRef = useRef<Editor>(null);
   const titleRef = useRef<HTMLInputElement | null>(null);
   const tagNamesRef = useRef<HTMLInputElement | null>(null);
-
-  const imgList = imgListStore((state) => state.imgList);
+  const imageList = imageListStore((state) => state.imageList);
   const setToggleModalEditor = modalStore(
     (state) => state.setToggleModalEditor,
   );
   const setPost = postStore((state) => state.setPost);
+  const tempPost = getLocalStorage<TempPost>(Name.TempPost);
   const router = useRouter();
-
   const onClicktoBack = () => {
     router.back();
   };
 
-  const handOverPost = () => {
-    const title = getCheckedString(titleRef.current?.value);
-    const tagNames = getCheckedString(tagNamesRef.current?.value);
-    const contentMarkdown = getCheckedString(
-      editorRef?.current?.getInstance().getMarkdown(),
+  const onClickUploadTempPost = () => {
+    const { title, tagNames, content } = handleGetEditorData(
+      editorRef,
+      titleRef,
+      tagNamesRef,
     );
-    const contentHTML = getCheckedString(
-      editorRef?.current?.getInstance().getHTML(),
-    );
-    const tagNameArr = handleTagNamesChange(tagNames);
-    setPost({
-      thumbnail: imgList[0],
+    const newTempPost = {
       title,
-      content: contentMarkdown,
-      subContent: convetHTMLtoString(contentHTML),
-      tagNames: tagNameArr,
+      tagNames,
+      content,
+      imageList,
+    };
+    setLocalStorage(newTempPost, Name.TempPost);
+  };
+
+  useEffect(() => {
+    const intervalTempPost = setInterval(() => {
+      onClickUploadTempPost();
+    }, 300000);
+    return () => clearInterval(intervalTempPost);
+  }, []);
+
+  const handOverPost = () => {
+    const { title, tagNames, content, subContent } = handleGetEditorData(
+      editorRef,
+      titleRef,
+      tagNamesRef,
+    );
+    setPost({
+      thumbnail: imageList[0],
+      title,
+      content,
+      subContent,
+      tagNames,
     });
     setToggleModalEditor();
   };
@@ -63,6 +82,7 @@ const EditPost = () => {
       <StyledInputTitle
         ref={titleRef}
         placeholder={MsgPlaceholder.title}
+        defaultValue={tempPost?.title}
         id="title"
       />
       <div>
@@ -70,11 +90,12 @@ const EditPost = () => {
         <StyledInputTagNames
           ref={tagNamesRef}
           placeholder={MsgPlaceholder.tagNames}
+          defaultValue={tempPost?.tagNames}
           id="tagNames"
           // value={tagValue}
         />
       </div>
-      <EditNoSSR editorRef={editorRef} />
+      <EditNoSSR initialContent={tempPost?.content} editorRef={editorRef} />
       <StyledBtnContainer>
         <Button
           type="button"
@@ -84,14 +105,24 @@ const EditPost = () => {
           size={'sm'}
           onClick={onClicktoBack}
         />
-        <Button
-          type="button"
-          content="제출하기"
-          color={Palette.TWISTED1}
-          hover={'opacity'}
-          size={'sm'}
-          onClick={handOverPost}
-        />
+        <div>
+          <Button
+            type="button"
+            content="임시저장"
+            color={Palette.TWISTED2}
+            hover={'opacity'}
+            size={'sm'}
+            onClick={onClickUploadTempPost}
+          />
+          <Button
+            type="button"
+            content="제출하기"
+            color={Palette.TWISTED1}
+            hover={'opacity'}
+            size={'sm'}
+            onClick={handOverPost}
+          />
+        </div>
       </StyledBtnContainer>
     </StyledEditPostContainer>
   );
