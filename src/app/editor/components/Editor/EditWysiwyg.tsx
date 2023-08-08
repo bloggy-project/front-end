@@ -5,12 +5,9 @@ import '@toast-ui/editor-plugin-code-syntax-highlight/dist/toastui-editor-plugin
 import codeSyntaxHighlight from '@toast-ui/editor-plugin-code-syntax-highlight';
 import 'prismjs/themes/prism.css';
 import Prism from 'prismjs';
-import 'tui-color-picker/dist/tui-color-picker.css';
-import '@toast-ui/editor-plugin-color-syntax/dist/toastui-editor-plugin-color-syntax.css';
-import colorSyntax from '@toast-ui/editor-plugin-color-syntax';
 import { getPreSignedUrl, uploadImg } from '@/lib/api/aws';
 import handleCdnPath from '@/lib/handler/handleCdnPath';
-import imgListStore from '@/store/imgListStore';
+import imgListStore from '@/store/imageListStore';
 import { shallow } from 'zustand/shallow';
 import { handleImgFile } from '@/lib/handler/handleImgFile';
 import { handleErrorAlert } from '@/lib/handler/handleError';
@@ -73,7 +70,7 @@ const EditWysiwyg = ({ initialContent, editorRef }: EditWysiwygProps) => {
         toolbarItems={toolbarOptions}
         initialValue={initialContent ? initialContent : ''}
         hooks={{ addImageBlobHook: uploadImgUrl }}
-        plugins={[colorSyntax, [codeSyntaxHighlight, { highlighter: Prism }]]}
+        plugins={[[codeSyntaxHighlight, { highlighter: Prism }]]}
       />
     </StyledEditorcontainer>
   );

@@ -14,7 +14,6 @@
     "@tanstack/react-query": "^4.29.12",
     "@tanstack/react-query-devtools": "^4.29.12",
     "@toast-ui/editor-plugin-code-syntax-highlight": "^3.1.0",
-    "@toast-ui/editor-plugin-color-syntax": "^3.1.0",
     "@toast-ui/react-editor": "^3.2.3",
     "@types/node": "20.2.6",
     "@types/react": "18.2.10",
