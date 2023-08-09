@@ -15,7 +15,6 @@ import useChangeUserInfo from '@/query/userinfo/useChangeUserInfo';
 import { handleCompareTwice } from '@/lib/handler/handleCompare';
 import Button from '@/components/Button/Button';
 import { Palette } from '@/assets/color';
-import { handleErrorAlert } from '@/lib/handler/handleError';
 
 type EmailSettingProps = {
   email: UserInfo['email'];
@@ -45,7 +44,7 @@ const EmailSetting = ({ email }: EmailSettingProps) => {
       handleCompareTwice(email, newEmail);
       changeUserInfo.mutate({ email: newEmail });
     } catch (err) {
-      handleErrorAlert(err);
+      return;
     }
   };
   return (

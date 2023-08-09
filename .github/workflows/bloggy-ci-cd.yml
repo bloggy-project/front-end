@@ -38,7 +38,6 @@ jobs:
         run: |
           docker build -t ${{ env.Image }} -f ./Dockerfile .
           docker push ${{ env.Image }}
-
       - name: Deploy to EC2
         uses: appleboy/ssh-action@master
         with:
@@ -54,19 +53,16 @@ jobs:
             else
              echo "Error: Container does not exist or could not be stopped"
             fi
-
             if docker rmi "${{ env.Image }}" 2>/dev/null; then
              echo "Image removed successfully or not found"
             else
              echo "Error: Image does not exist or could not be removed"
             fi
-
             if docker pull "${{ env.Image }}"; then
              echo "Image pulled and container started successfully"
             else
              echo "Error: Failed to pull the image"
             fi
-
             if docker run --rm --name "${{ env.Container }}" -dp 3000:3000 "${{ env.Image }}"; then
              echo "Container created and run successfully"
             else

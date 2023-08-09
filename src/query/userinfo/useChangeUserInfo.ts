@@ -3,6 +3,7 @@ import { UserInfo } from '@/lib/types/auth';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import QueryKey from '../key';
 import { MsgAlert } from '@/assets/message';
+import handleToast from '@/lib/handler/handleToast';
 
 const useChangeUserInfo = () => {
   const queryClient = useQueryClient();
@@ -34,12 +35,21 @@ const useChangeUserInfo = () => {
     // If the mutation fails,
     // use the context returned from onMutate to roll back
     onError: (_err, _newTodo, context) => {
+      handleToast({
+        type: 'error',
+        message: MsgAlert.Userinfo.failChangeUserinfo,
+      });
       queryClient.setQueryData([QueryKey.UserInfo], context?.previousUserInfo);
-      throw Error(MsgAlert.Userinfo.failChangeUserinfo);
     },
     // Always refetch after error or success:
     onSettled: () => {
       queryClient.invalidateQueries({ queryKey: [QueryKey.UserInfo] });
+    },
+    onSuccess: () => {
+      handleToast({
+        type: 'success',
+        message: MsgAlert.Userinfo.success,
+      });
     },
   });
 

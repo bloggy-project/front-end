@@ -14,7 +14,6 @@ import useChangeUserInfo from '@/query/userinfo/useChangeUserInfo';
 import { handleCompareTwice } from '@/lib/handler/handleCompare';
 import { UserInfo } from '@/lib/types/auth';
 import { AiFillLock } from 'react-icons/ai';
-import { handleErrorAlert } from '@/lib/handler/handleError';
 
 type NameSettingProps = {
   name: UserInfo['name'];
@@ -40,7 +39,7 @@ const NameSetting = ({ name }: NameSettingProps) => {
       handleCompareTwice(name, newName);
       changeUserInfo.mutate({ name: newName });
     } catch (err) {
-      handleErrorAlert(err);
+      return;
     }
   };
 

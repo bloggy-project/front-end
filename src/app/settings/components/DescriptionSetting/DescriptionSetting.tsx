@@ -15,7 +15,6 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import useChangeUserInfo from '@/query/userinfo/useChangeUserInfo';
 import { handleCompareTwice } from '@/lib/handler/handleCompare';
 import { UserInfo } from '@/lib/types/auth';
-import { handleErrorAlert } from '@/lib/handler/handleError';
 
 type DescriptionSettingProps = {
   description: UserInfo['description'] | undefined;
@@ -47,7 +46,7 @@ const DescriptionSetting = ({ description }: DescriptionSettingProps) => {
       handleCompareTwice(description, newDescription);
       changeUserInfo.mutate({ description: newDescription });
     } catch (err) {
-      handleErrorAlert(err);
+      return;
     }
   };
 

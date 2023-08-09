@@ -5,3 +5,10 @@ export interface Post {
   subContent: string;
   tagNames: string[];
 }
+
+export interface TempPost {
+  title: string;
+  content: string;
+  tagNames: string[];
+  imageList: string[];
+}

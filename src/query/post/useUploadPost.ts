@@ -36,8 +36,12 @@ const useUploadPost = () => {
     // Always refetch after error or success:
     onSettled: () => {
       queryClient.invalidateQueries({ queryKey: [QueryKey.Post] });
+    },
+    onSuccess: () => {
       //새 게시글 추가 후 페이지네이션 데이터 다시 요청
       queryClient.resetQueries({ queryKey: [QueryKey.GetRecentPages] });
+      //임시 저장된 쿼리 캐시 삭제
+      queryClient.removeQueries({ queryKey: [QueryKey.TempPost] });
     },
   });
 

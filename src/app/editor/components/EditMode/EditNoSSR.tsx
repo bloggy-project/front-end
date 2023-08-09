@@ -8,7 +8,7 @@ const EditWysiwyg = dynamic(() => import('../Editor/EditWysiwyg'), {
 });
 
 type EditNoSSRProps = {
-  initialContent?: string | null;
+  initialContent?: string;
   editorRef: RefObject<Editor>;
 };
 

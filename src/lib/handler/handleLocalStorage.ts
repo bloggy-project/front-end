@@ -35,28 +35,25 @@ export default class MyLocalStorage<T> {
   }
 }
 
-// export const getLocalStorage = <T>(name: string): T | null => {
-//   if (checkTypeWindow()) {
-//     return null;
-//   }
-//   const storageData = localStorage.getItem(name);
-//   if (storageData) {
-//     return JSON.parse(storageData);
-//   }
-//   console.log('localStorage에 값이 존재하지 않습니다');
-//   return null;
-// };
+export const getLocalStorage = <T>(name: string): T | null => {
+  if (checkTypeWindow()) {
+    return null;
+  }
+  const storageData = localStorage.getItem(name);
+  if (storageData) {
+    return JSON.parse(storageData);
+  }
 
-// export const setLocalStorage = <T>(data: T, name: string) => {
-//   const initialItem = getLocalStorage(name);
-//   if (!initialItem) {
-//     localStorage.setItem(name, JSON.stringify(data));
-//   }
-// };
+  return null;
+};
 
-// export const removeLocalStorage = (name: string) => {
-//   const initialItem = getLocalStorage(name);
-//   if (!initialItem) {
-//     localStorage.removeItem(name);
-//   }
-// };
+export const setLocalStorage = <T>(data: T, name: string) => {
+  localStorage.setItem(name, JSON.stringify(data));
+};
+
+export const removeLocalStorage = (name: string) => {
+  const initialItem = getLocalStorage(name);
+  if (initialItem) {
+    localStorage.removeItem(name);
+  }
+};

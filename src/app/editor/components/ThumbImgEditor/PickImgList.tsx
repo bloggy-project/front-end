@@ -1,6 +1,6 @@
 import { AiOutlineLeft, AiOutlineRight } from 'react-icons/ai';
 import { StyledPickImgList } from './PickImgList-Styled';
-import imgListStore from '@/store/imgListStore';
+import imageListStore from '@/store/imageListStore';
 import { useCallback, useEffect, useState } from 'react';
 import postStore from '@/store/postStore';
 
@@ -9,10 +9,10 @@ type PickImgListProps = {
 };
 
 const PickImgList = ({ isDisable }: PickImgListProps) => {
-  const imgList = imgListStore((state) => state.imgList);
+  const imageList = imageListStore((state) => state.imageList);
   const setPost = postStore((state) => state.setPost);
   const [index, setIndex] = useState(0);
-  const imgLastIndex = imgList.length ? imgList.length - 1 : 0;
+  const imgLastIndex = imageList.length ? imageList.length - 1 : 0;
   const imgFirstIndex = 0;
 
   const onClickAddImg = useCallback(() => {
@@ -36,7 +36,7 @@ const PickImgList = ({ isDisable }: PickImgListProps) => {
   }, [index, imgLastIndex]);
 
   useEffect(() => {
-    setPost({ thumbnail: imgList[index] });
+    setPost({ thumbnail: imageList[index] });
   }, [index]);
 
   return (

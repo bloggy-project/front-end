@@ -1,11 +1,10 @@
 'use client';
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import EditNoSSR from '../EditMode/EditNoSSR';
 import { Editor } from '@toast-ui/react-editor';
 import Button from '@/components/Button/Button';
 import { Palette } from '@/assets/color';
-import { handleTagNamesChange } from '@/lib/handler/handleTagNames';
-import imgListStore from '@/store/imgListStore';
+import imageListStore from '@/store/imageListStore';
 import modalStore from '@/store/modalStore';
 import postStore from '@/store/postStore';
 import { useRouter } from 'next/navigation';
@@ -15,45 +14,62 @@ import {
   StyledInputTagNames,
   StyledInputTitle,
 } from './EditPost-Styled';
-import {
-  getCheckedString,
-  convetHTMLtoString,
-} from '@/lib/handler/handleStrings';
 import Label from '@/components/Label/Label';
+import handleGetEditorData from '@/lib/handler/handleGetEditorData';
 import { MsgPlaceholder } from '@/assets/message';
+import useGetTempPost from '@/query/post/useGetTempPost';
+import useUploadTempPost from '@/query/post/useUploadTempPost';
+import { convetTagsArrayToString } from '@/lib/handler/handleTagNames';
 
 const EditPost = () => {
   const editorRef = useRef<Editor>(null);
   const titleRef = useRef<HTMLInputElement | null>(null);
   const tagNamesRef = useRef<HTMLInputElement | null>(null);
-
-  const imgList = imgListStore((state) => state.imgList);
+  const imageList = imageListStore((state) => state.imageList);
   const setToggleModalEditor = modalStore(
     (state) => state.setToggleModalEditor,
   );
   const setPost = postStore((state) => state.setPost);
+  const { tempPost } = useGetTempPost();
+  const uploadTempPost = useUploadTempPost();
   const router = useRouter();
-
   const onClicktoBack = () => {
     router.back();
   };
 
-  const handOverPost = () => {
-    const title = getCheckedString(titleRef.current?.value);
-    const tagNames = getCheckedString(tagNamesRef.current?.value);
-    const contentMarkdown = getCheckedString(
-      editorRef?.current?.getInstance().getMarkdown(),
+  const onClickUploadTempPost = () => {
+    const { title, tagNames, content } = handleGetEditorData(
+      editorRef,
+      titleRef,
+      tagNamesRef,
     );
-    const contentHTML = getCheckedString(
-      editorRef?.current?.getInstance().getHTML(),
-    );
-    const tagNameArr = handleTagNamesChange(tagNames);
-    setPost({
-      thumbnail: imgList[0],
+    const newTempPost = {
       title,
-      content: contentMarkdown,
-      subContent: convetHTMLtoString(contentHTML),
-      tagNames: tagNameArr,
+      tagNames,
+      content,
+      imageList,
+    };
+    uploadTempPost.mutate(newTempPost);
+  };
+  useEffect(() => {
+    const intervalTempPost = setInterval(() => {
+      onClickUploadTempPost();
+    }, 300000); //30초 인터벌 임시저장
+    return () => clearInterval(intervalTempPost);
+  }, []);
+
+  const onClickServePost = () => {
+    const { title, tagNames, content, subContent } = handleGetEditorData(
+      editorRef,
+      titleRef,
+      tagNamesRef,
+    );
+    setPost({
+      thumbnail: imageList[0],
+      title,
+      content,
+      subContent,
+      tagNames,
     });
     setToggleModalEditor();
   };
@@ -63,6 +79,7 @@ const EditPost = () => {
       <StyledInputTitle
         ref={titleRef}
         placeholder={MsgPlaceholder.title}
+        defaultValue={tempPost?.title}
         id="title"
       />
       <div>
@@ -70,11 +87,17 @@ const EditPost = () => {
         <StyledInputTagNames
           ref={tagNamesRef}
           placeholder={MsgPlaceholder.tagNames}
+          defaultValue={convetTagsArrayToString(tempPost?.tagNames)}
           id="tagNames"
-          // value={tagValue}
         />
       </div>
-      <EditNoSSR editorRef={editorRef} />
+      {tempPost?.content ? (
+        <EditNoSSR initialContent={tempPost.content} editorRef={editorRef} />
+      ) : (
+        <>
+          <EditNoSSR editorRef={editorRef} />
+        </>
+      )}
       <StyledBtnContainer>
         <Button
           type="button"
@@ -84,33 +107,27 @@ const EditPost = () => {
           size={'sm'}
           onClick={onClicktoBack}
         />
-        <Button
-          type="button"
-          content="제출하기"
-          color={Palette.TWISTED1}
-          hover={'opacity'}
-          size={'sm'}
-          onClick={handOverPost}
-        />
+        <div>
+          <Button
+            type="button"
+            content="임시저장"
+            color={Palette.TWISTED2}
+            hover={'opacity'}
+            size={'sm'}
+            onClick={onClickUploadTempPost}
+          />
+          <Button
+            type="button"
+            content="제출하기"
+            color={Palette.TWISTED1}
+            hover={'opacity'}
+            size={'sm'}
+            onClick={onClickServePost}
+          />
+        </div>
       </StyledBtnContainer>
     </StyledEditPostContainer>
   );
 };
 
 export default EditPost;
-// 태그네임 리팩토링 시 고려사항
-// const [tagValue, setTagValue] = useState<string>('');
-
-// const handleTagChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-//   let inputValue = event.target.value;
-//   if (inputValue && inputValue.charAt(0) !== '#') {
-//     inputValue = `#${inputValue}`;
-//   }
-//   setTagValue(inputValue);
-// };
-// const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
-//   if (event.key === 'Enter') {
-//     event.preventDefault();
-//     setTagValue((tagNames) => `${tagNames} #`);
-//   }
-// };

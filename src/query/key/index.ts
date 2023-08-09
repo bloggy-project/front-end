@@ -3,6 +3,7 @@ const QueryKey = {
   GetPopularPages: 'GetPopularPages',
   UserInfo: 'UserInfo',
   Post: 'Post',
+  TempPost: 'TempPost',
 };
 
 export default QueryKey;

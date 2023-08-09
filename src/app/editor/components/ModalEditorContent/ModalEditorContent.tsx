@@ -28,7 +28,8 @@ import useUploadPost from '@/query/post/useUploadPost';
 import { shallow } from 'zustand/shallow';
 import { handleErrorAlert } from '@/lib/handler/handleError';
 import { useRouter } from 'next/navigation';
-import { getCheckedString } from '@/lib/handler/handleStrings';
+import { removeLocalStorage } from '@/lib/handler/handleLocalStorage';
+import { Name } from '@/assets/storage';
 
 type PostFormProps = {
   title: string;
@@ -72,9 +73,10 @@ const ModalEditorContent = () => {
       uploadPost.mutate({
         ...post,
         title,
-        subContent: getCheckedString(subContent),
+        subContent: subContent ?? '',
       });
       setToggleModalEditor();
+      removeLocalStorage(Name.TempPost);
       clearPost();
       onClicktoIndex();
     } catch (err) {

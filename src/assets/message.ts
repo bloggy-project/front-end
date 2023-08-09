@@ -24,6 +24,7 @@ export const MsgAlert = {
     disUseableName: '이미 존재하는 닉네임입니다',
   },
   Userinfo: {
+    success: '유저 정보 변경에 성공하였습니다',
     notExist: '해당 유저가 존재하지 않습니다. 다시 한 번 시도해주세요',
     failChangeUserinfo:
       '정보 수정에 실패하였습니다. 계정을 다시 한 번 확인해 주세요.',
@@ -35,5 +36,8 @@ export const MsgAlert = {
   },
   Post: {
     noContent: '내용을 입력해 주세요.',
+    getTemp: '저장된 포스트를 불러왔습니다',
+    successTemp: '임시저장이 완료되었습니다',
+    failTemp: '임시저장에 실패했습니다. 다시 한 번 시도해주세요.',
   },
 };
