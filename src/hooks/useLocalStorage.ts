@@ -1,12 +1,23 @@
 import { useEffect, useState } from 'react';
-import MyLocalStorage from '@/lib/handler/handleLocalStorage';
+import { getLocalStorage } from '@/lib/handler/handleLocalStorage';
+import handleToast from '@/lib/handler/handleToast';
 
-export const useLocalStorage = <T>(name: string, handleErr?: () => void) => {
-  const [localStorageData, setLocalStorage] = useState<T | null>(null);
+interface ToastProps {
+  type: 'success' | 'error' | 'info' | 'custom';
+  message?: string;
+}
+
+export const useLocalStorage = <T>(name: string, useToast?: ToastProps) => {
+  const [localStorageData, setLocalStorageData] = useState<T | null>(null);
 
   useEffect(() => {
-    setLocalStorage(new MyLocalStorage<T>(name).get());
-  }, [name, handleErr]);
+    const getStorageData = getLocalStorage<T>(name);
+    if (getStorageData) {
+      console.log('???');
+      setLocalStorageData(getStorageData);
+      useToast && handleToast({ ...useToast });
+    }
+  }, []);
 
   return localStorageData;
 };

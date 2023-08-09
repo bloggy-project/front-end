@@ -16,13 +16,10 @@ import {
 } from './EditPost-Styled';
 import Label from '@/components/Label/Label';
 import handleGetEditorData from '@/lib/handler/handleGetEditorData';
-import {
-  setLocalStorage,
-  getLocalStorage,
-} from '@/lib/handler/handleLocalStorage';
-import { TempPost } from '@/lib/types/post';
-import { Name } from '@/assets/storage';
 import { MsgPlaceholder } from '@/assets/message';
+import useGetTempPost from '@/query/post/useGetTempPost';
+import useUploadTempPost from '@/query/post/useUploadTempPost';
+import { convetTagsArrayToString } from '@/lib/handler/handleTagNames';
 
 const EditPost = () => {
   const editorRef = useRef<Editor>(null);
@@ -33,7 +30,8 @@ const EditPost = () => {
     (state) => state.setToggleModalEditor,
   );
   const setPost = postStore((state) => state.setPost);
-  const tempPost = getLocalStorage<TempPost>(Name.TempPost);
+  const { tempPost } = useGetTempPost();
+  const uploadTempPost = useUploadTempPost();
   const router = useRouter();
   const onClicktoBack = () => {
     router.back();
@@ -51,17 +49,16 @@ const EditPost = () => {
       content,
       imageList,
     };
-    setLocalStorage(newTempPost, Name.TempPost);
+    uploadTempPost.mutate(newTempPost);
   };
-
   useEffect(() => {
     const intervalTempPost = setInterval(() => {
       onClickUploadTempPost();
-    }, 300000);
+    }, 300000); //30초 인터벌 임시저장
     return () => clearInterval(intervalTempPost);
   }, []);
 
-  const handOverPost = () => {
+  const onClickServePost = () => {
     const { title, tagNames, content, subContent } = handleGetEditorData(
       editorRef,
       titleRef,
@@ -90,12 +87,17 @@ const EditPost = () => {
         <StyledInputTagNames
           ref={tagNamesRef}
           placeholder={MsgPlaceholder.tagNames}
-          defaultValue={tempPost?.tagNames}
+          defaultValue={convetTagsArrayToString(tempPost?.tagNames)}
           id="tagNames"
-          // value={tagValue}
         />
       </div>
-      <EditNoSSR initialContent={tempPost?.content} editorRef={editorRef} />
+      {tempPost?.content ? (
+        <EditNoSSR initialContent={tempPost.content} editorRef={editorRef} />
+      ) : (
+        <>
+          <EditNoSSR editorRef={editorRef} />
+        </>
+      )}
       <StyledBtnContainer>
         <Button
           type="button"
@@ -120,7 +122,7 @@ const EditPost = () => {
             color={Palette.TWISTED1}
             hover={'opacity'}
             size={'sm'}
-            onClick={handOverPost}
+            onClick={onClickServePost}
           />
         </div>
       </StyledBtnContainer>
@@ -129,19 +131,3 @@ const EditPost = () => {
 };
 
 export default EditPost;
-// 태그네임 리팩토링 시 고려사항
-// const [tagValue, setTagValue] = useState<string>('');
-
-// const handleTagChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-//   let inputValue = event.target.value;
-//   if (inputValue && inputValue.charAt(0) !== '#') {
-//     inputValue = `#${inputValue}`;
-//   }
-//   setTagValue(inputValue);
-// };
-// const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
-//   if (event.key === 'Enter') {
-//     event.preventDefault();
-//     setTagValue((tagNames) => `${tagNames} #`);
-//   }
-// };

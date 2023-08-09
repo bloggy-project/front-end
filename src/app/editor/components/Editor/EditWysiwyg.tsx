@@ -15,7 +15,7 @@ import useWindowResize from '@/hooks/useWindowResize';
 import { StyledEditorcontainer } from './EditWysiwyg-Styled';
 
 type EditWysiwygProps = {
-  initialContent?: string | null;
+  initialContent?: string;
   editorRef: RefObject<Editor>;
 };
 
@@ -68,7 +68,7 @@ const EditWysiwyg = ({ initialContent, editorRef }: EditWysiwygProps) => {
         usageStatistics={false}
         useCommandShortcut={true}
         toolbarItems={toolbarOptions}
-        initialValue={initialContent ? initialContent : ''}
+        initialValue={initialContent}
         hooks={{ addImageBlobHook: uploadImgUrl }}
         plugins={[[codeSyntaxHighlight, { highlighter: Prism }]]}
       />
