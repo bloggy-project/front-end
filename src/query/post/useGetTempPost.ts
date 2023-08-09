@@ -3,6 +3,8 @@ import QueryKey from '../key';
 import { getTempPost } from '@/lib/api/post';
 import imageListStore from '@/store/imageListStore';
 import authStore from '@/store/authStore';
+import handleToast from '@/lib/handler/handleToast';
+import { MsgAlert } from '@/assets/message';
 
 const useGetTempPost = () => {
   const setImgList = imageListStore((state) => state.setImgList);
@@ -13,6 +15,10 @@ const useGetTempPost = () => {
     queryFn: getTempPost,
     onSuccess: (data) => {
       setImgList(data.imageList);
+      handleToast({
+        type: 'success',
+        message: MsgAlert.Post.getTemp,
+      });
     },
   });
   return {

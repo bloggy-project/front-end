@@ -4,6 +4,7 @@ import { StatusToken } from '@/assets/status';
 import { notFound } from 'next/navigation';
 import EditPost from './components/EditPost/EditPost';
 import ModalEditor from './components/ModalEditor/ModalEditor';
+import ToastCustom from '@/components/Toast/ToastCustom';
 
 const PageSettings = () => {
   const accessToken = authStore((state) => state.accessToken);
@@ -11,10 +12,11 @@ const PageSettings = () => {
     notFound();
   } else {
     return (
-      <div>
+      <>
         <EditPost />
         <ModalEditor />
-      </div>
+        <ToastCustom />
+      </>
     );
   }
 };
