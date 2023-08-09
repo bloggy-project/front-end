@@ -2,7 +2,7 @@
 FROM node:18.17.0-alpine3.17 AS build
 WORKDIR /app
 
-COPY package.json package-lock.json ./
+COPY package.json .
 RUN npm install --legacy-peer-deps yarn \
 yarn install
 

@@ -5,3 +5,9 @@ README.md
 .next
 .git
 .github
+.DS_Store
+*.log
+*.lock
+*.md
+*.yml
+*.yaml
