@@ -17,6 +17,6 @@ COPY --from=build /app/package.json /app/package-lock.json ./
 COPY --from=build /app/.next ./.next
 COPY --from=build /app/public ./public
 
-RUN npm install --only=prod
+RUN npm install --only=prod --legacy-peer-deps
 
 CMD [ "yarn", "start" ]
