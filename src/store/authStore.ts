@@ -5,6 +5,7 @@ import { devtools } from 'zustand/middleware';
 type authState = {
   accessToken: string | null;
   setAccessToken: (value: string | null) => void;
+  clearAccessToken: () => void;
 };
 
 const authStore = create<authState>()(
@@ -14,6 +15,10 @@ const authStore = create<authState>()(
       set({
         accessToken: value,
       }),
+    clearAccessToken: () =>
+      set(() => ({
+        accessToken: StatusToken.No_token,
+      })),
   })),
 );
 
