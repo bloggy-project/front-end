@@ -1,22 +1,24 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import QueryKey from '../key';
-import { Post } from '@/lib/types/post';
+import { PostUpload } from '@/lib/types/post';
 import { uploadPost } from '@/lib/api/post';
 
 const useUploadPost = () => {
   const queryClient = useQueryClient();
   const mutation = useMutation({
-    mutationFn: (post: Post) => uploadPost(post),
+    mutationFn: (post: PostUpload) => uploadPost(post),
     onMutate: async (post) => {
       // Cancel any outgoing refetches
       // (so they don't overwrite our optimistic update)
       await queryClient.cancelQueries({ queryKey: [QueryKey.Post] });
 
       // Snapshot the previous value
-      const previousPost = queryClient.getQueryData<Post>([QueryKey.Post]);
+      const previousPost = queryClient.getQueryData<PostUpload>([
+        QueryKey.Post,
+      ]);
 
       // Optimistically update to the new value
-      queryClient.setQueryData<Post>(
+      queryClient.setQueryData<PostUpload>(
         [QueryKey.Post],
         (old) =>
           old && {

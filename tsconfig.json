@@ -29,7 +29,9 @@
     "**/*.tsx",
     "jest.config.ts",
     ".next/types/**/*.ts",
-    "next.config.js"
-, "src/mocks/api/authApi.ts"  ],
+    "next.config.js",
+    "src/mocks/api/authApi.ts",
+    "src/app/[blogger]/page.tsx"
+  ],
   "exclude": ["node_modules"]
 }

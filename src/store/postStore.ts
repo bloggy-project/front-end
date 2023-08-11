@@ -1,10 +1,10 @@
-import { Post } from '@/lib/types/post';
+import { PostUpload } from '@/lib/types/post';
 import { create } from 'zustand';
 import { devtools } from 'zustand/middleware';
 
 type postState = {
-  post: Post;
-  setPost: (value: Partial<Post>) => void;
+  post: PostUpload;
+  setPost: (value: Partial<PostUpload>) => void;
   clearPost: () => void;
 };
 

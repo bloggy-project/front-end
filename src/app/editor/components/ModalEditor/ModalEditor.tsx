@@ -1,12 +1,12 @@
 import modalStore from '@/store/modalStore';
-import { Post } from '@/lib/types/post';
+import { PostUpload } from '@/lib/types/post';
 import ModalWrapper from '@/components/Modal/ModalWrapper';
 import ModalEditorContent from '../ModalEditorContent/ModalEditorContent';
 import useScrollOverflow from '@/hooks/useScrollOverflow';
 import { StyledModalEditorContainer } from './ModalEditor-Styled';
 
 type ModalEditor = {
-  data: Post;
+  data: PostUpload;
 };
 
 const ModalEditor = () => {
