@@ -87,13 +87,17 @@ export const StyledInfo = styled.div`
   white-space: nowrap;
 `;
 
-export const StyledSubInfo1 = styled.div`
-  & > span {
-    font-size: 1.1rem;
-    display: inline-block;
-    margin: 0 0.5rem 0 0.5rem;
-  }
+export const StyledSubInfo1 = styled.div``;
+
+export const StyledInfoText = styled.span`
+  font-size: 1.1rem;
 `;
+
+export const StyledInfoSpace = styled(StyledInfoText)`
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+`;
+
 export const StyledSubInfo2 = styled.div`
   & > svg {
     display: inline;

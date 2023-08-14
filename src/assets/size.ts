@@ -1,5 +1,6 @@
 export const Layout = {
   WIDTH: '129rem',
+  POST: '85rem',
 };
 
 export const ImageSizesProps = {

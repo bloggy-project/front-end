@@ -13,6 +13,7 @@ import { handleImgFile } from '@/lib/handler/handleImgFile';
 import { handleErrorAlert } from '@/lib/handler/handleError';
 import useWindowResize from '@/hooks/useWindowResize';
 import { StyledEditorcontainer } from './EditWysiwyg-Styled';
+import '@/stylesheet/toast-viewer.css';
 
 type EditWysiwygProps = {
   initialContent?: string;

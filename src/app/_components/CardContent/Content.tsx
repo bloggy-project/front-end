@@ -7,18 +7,21 @@ import {
   StyledInfo,
   StyledSubInfo1,
   StyledSubInfo2,
+  StyledInfoText,
+  StyledInfoSpace,
 } from './Content-Styled';
 import { FaHeart, FaRegCommentDots } from 'react-icons/fa';
 import Image from 'next/image';
 import { Content } from '@/lib/types/pages';
 import { ImageSizesProps } from '@/assets/size';
+import cutDateTime from '@/lib/handler/handleDateTime';
 
 type ContentProps = {
   data: Content;
 };
 
 const Content = ({ data }: ContentProps) => {
-  const createdDate = data.createdAt.split('T')[0];
+  const cuttedDateTime = cutDateTime(data.createdAt);
 
   return (
     <StyledContent>
@@ -38,9 +41,9 @@ const Content = ({ data }: ContentProps) => {
 
       <StyledInfo>
         <StyledSubInfo1>
-          <span>{createdDate}</span>
-          <span> | </span>
-          <span>{data.username}</span>
+          <StyledInfoText>{cuttedDateTime}</StyledInfoText>
+          <StyledInfoSpace> | </StyledInfoSpace>
+          <StyledInfoText>{data.username}</StyledInfoText>
         </StyledSubInfo1>
         <StyledSubInfo2>
           <FaRegCommentDots />

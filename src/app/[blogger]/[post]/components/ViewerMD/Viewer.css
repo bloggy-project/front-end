@@ -1,0 +1,33 @@
+.toastui-editor-contents p {
+  font-size: 1.4rem;
+}
+
+.toastui-editor-contents h1,
+.toastui-editor-contents h2,
+.toastui-editor-contents h3,
+.toastui-editor-contents h4,
+.toastui-editor-contents h5,
+.toastui-editor-contents h6 {
+  border-bottom: none;
+}
+
+.toastui-editor-contents h1 {
+  font-size: 3rem;
+}
+
+.toastui-editor-contents h2 {
+  font-size: 2.6rem;
+}
+
+.toastui-editor-contents h3 {
+  font-size: 2.2rem;
+}
+
+.toastui-editor-contents h4 {
+  font-size: 2rem;
+}
+
+.toastui-editor-contents img {
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
