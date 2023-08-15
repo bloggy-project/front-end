@@ -77,3 +77,28 @@ export const StyledButton = styled.button<StyledButtonProps>`
       }
     `}
 `;
+
+type StyledSubBtnBoxProps = {
+  display?: string;
+  direction?: string;
+  align?: string;
+  justify?: string;
+  color?: string;
+};
+
+export const StyledSubBtnBox = styled.div<StyledSubBtnBoxProps>`
+  display: ${(props) => props.display};
+  flex-direction: ${(props) => props.direction};
+  align-items: ${(props) => props.align};
+  justify-content: ${(props) => props.justify};
+  background-color: ${(props) => props.color};
+`;
+
+type StyledBtnSpaceProps = {
+  marginLR: string;
+};
+
+export const StyledBtnSpace = styled.div<StyledBtnSpaceProps>`
+  margin-left: ${(props) => props.marginLR};
+  margin-right: ${(props) => props.marginLR};
+`;
