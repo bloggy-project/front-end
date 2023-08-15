@@ -20,6 +20,10 @@ import { MsgPlaceholder } from '@/assets/message';
 import useGetTempPost from '@/query/post/useGetTempPost';
 import useUploadTempPost from '@/query/post/useUploadTempPost';
 import { convetTagsArrayToString } from '@/lib/handler/handleTagNames';
+import {
+  StyledBtnSpace,
+  StyledSubBtnBox,
+} from '@/components/Button/Button-Styled';
 
 const EditPost = () => {
   const editorRef = useRef<Editor>(null);
@@ -107,15 +111,16 @@ const EditPost = () => {
           size={'sm'}
           onClick={onClicktoBack}
         />
-        <div>
+        <StyledSubBtnBox display="flex" align="center">
           <Button
             type="button"
             content="임시저장"
-            color={Palette.TWISTED2}
+            color={Palette.TWISTED3}
             hover={'opacity'}
             size={'sm'}
             onClick={onClickUploadTempPost}
           />
+          <StyledBtnSpace marginLR="1rem"></StyledBtnSpace>
           <Button
             type="button"
             content="제출하기"
@@ -124,7 +129,7 @@ const EditPost = () => {
             size={'sm'}
             onClick={onClickServePost}
           />
-        </div>
+        </StyledSubBtnBox>
       </StyledBtnContainer>
     </StyledEditPostContainer>
   );
