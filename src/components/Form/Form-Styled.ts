@@ -70,10 +70,14 @@ export const StyledTextarea = styled.textarea<TextareaProps>`
   resize: none;
   padding: 1rem 1.2rem;
   font-size: 1.4rem;
+  font-family: 'Roboto', 'Noto Sans KR', sans-serif;
   &:focus {
     border-color: ${Palette.TWISTED1};
     border-width: 1.5px;
     outline: none;
+  }
+  &::placeholder {
+    font-family: 'Roboto', 'Noto Sans KR', sans-serif;
   }
 `;
 
