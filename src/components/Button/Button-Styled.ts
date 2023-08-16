@@ -78,20 +78,12 @@ export const StyledButton = styled.button<StyledButtonProps>`
     `}
 `;
 
-type StyledSubBtnBoxProps = {
-  display?: string;
-  direction?: string;
-  align?: string;
-  justify?: string;
-  color?: string;
-};
-
-export const StyledSubBtnBox = styled.div<StyledSubBtnBoxProps>`
-  display: ${(props) => props.display};
-  flex-direction: ${(props) => props.direction};
-  align-items: ${(props) => props.align};
-  justify-content: ${(props) => props.justify};
-  background-color: ${(props) => props.color};
+export const StyledSubBtnBox = styled.div`
+  display: flex;
+  align-items: center;
+  & > buttons {
+    margin-left: 1rem;
+  }
 `;
 
 type StyledBtnSpaceProps = {
