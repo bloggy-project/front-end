@@ -9,12 +9,6 @@ export const StyledToast = styled(ToastContainer)`
     padding: 1.2rem;
   }
 
-  .Toastify__toast-icon {
-    & > svg {
-      fill: ${Palette.SPOT1};
-    }
-  }
-
   .Toastify__progress-bar--success {
     background-color: ${Palette.SPOT1};
   }
