@@ -15,11 +15,11 @@ export const MsgPlaceholder = {
 export const MsgAlert = {
   Login: {
     success: '로그인에 성공하였습니다.',
-    fail: '로그인에 실패하였습니다. 다시 한 번 확인해 주세요.',
+    fail: '로그인에 실패하였습니다. 계정을 다시 한 번 확인해 주세요.',
   },
   Join: {
     success: '회원가입이 완료되었습니다',
-    fail: '로그인에 실패하였습니다. 다시 한 번 확인해 주세요.',
+    fail: '이미 존재하는 계정입니다. 유저 정보를 다시 설정해 주세요',
     usableName: '사용할 수 있는 닉네임입니다',
     disUseableName: '이미 존재하는 닉네임입니다',
   },
