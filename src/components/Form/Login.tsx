@@ -13,6 +13,8 @@ import { onLogin } from '@/lib/api/auth';
 import { loginProps } from '@/lib/types/auth';
 import modalStore from '@/store/modalStore';
 import { MsgAlert, MsgPlaceholder } from '@/assets/message';
+import handleToast from '@/lib/handler/handleToast';
+import { getErrorResponseMsg } from '@/lib/handler/handleError';
 
 const Login = () => {
   const {
@@ -20,6 +22,7 @@ const Login = () => {
     handleSubmit,
     formState: { errors, isSubmitting },
     reset,
+    resetField,
   } = useForm({
     resolver: yupResolver(loginFormSchema),
     mode: 'onChange',
@@ -31,9 +34,18 @@ const Login = () => {
       await onLogin(email, password);
       reset();
       setToggleModal();
-      alert(MsgAlert.Login.success);
+      handleToast({
+        type: 'success',
+        message: MsgAlert.Login.success,
+        cratedOption: { position: 'top-center' },
+      });
     } catch (err) {
-      alert(MsgAlert.Login.fail);
+      handleToast({
+        type: 'error',
+        message: getErrorResponseMsg(err, MsgAlert.Login.fail),
+        cratedOption: { position: 'top-center' },
+      });
+      resetField('password');
     }
   };
 

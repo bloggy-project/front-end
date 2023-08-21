@@ -4,7 +4,7 @@ import NavbarButton from './NavbarButton';
 import useRefreshToken from '../../hooks/useRefreshToken';
 import modalStore from '@/store/modalStore';
 import useScrollOverflow from '@/hooks/useScrollOverflow';
-import useGetUserInfo from '@/query/userinfo/useGetUserInfo';
+import ToastCustom from '../Toast/ToastCustom';
 
 const Navbar = () => {
   const accessToken = useRefreshToken();
@@ -12,10 +12,13 @@ const Navbar = () => {
   useScrollOverflow(isOpenModal);
 
   return (
-    <NavbarWrapper>
-      <Logo />
-      <NavbarButton token={accessToken} />
-    </NavbarWrapper>
+    <>
+      <NavbarWrapper>
+        <Logo />
+        <NavbarButton token={accessToken} />
+      </NavbarWrapper>
+      <ToastCustom />
+    </>
   );
 };
 

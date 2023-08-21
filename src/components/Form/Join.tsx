@@ -15,6 +15,8 @@ import { checkUserName, onJoin } from '@/lib/api/auth';
 import { joinProps } from '@/lib/types/auth';
 import useCheckStrings from '@/hooks/useCheckStrings';
 import { MsgAlert, MsgPlaceholder } from '@/assets/message';
+import handleToast from '@/lib/handler/handleToast';
+import { getErrorResponseMsg } from '@/lib/handler/handleError';
 
 const Join = () => {
   const {
@@ -35,10 +37,27 @@ const Join = () => {
     //폼 제출 전 닉네임 중복확인 여부 확인
     const name = getValues().name;
     if (isCheckedStrings === name) {
-      await onJoin(joinInfo);
-      alert(MsgAlert.Join.success);
-      reset();
+      try {
+        await onJoin(joinInfo);
+        handleToast({
+          type: 'success',
+          message: MsgAlert.Join.success,
+          cratedOption: { position: 'top-center' },
+        });
+        reset();
+      } catch (err) {
+        handleToast({
+          type: 'error',
+          message: getErrorResponseMsg(err, MsgAlert.Join.fail),
+          cratedOption: { position: 'top-center' },
+        });
+      }
     } else {
+      handleToast({
+        type: 'warning',
+        message: '닉네임 중복을 확인해 주세요',
+        cratedOption: { position: 'top-center' },
+      });
       setError('name', {
         message: '닉네임 중복을 확인해 주세요',
       });
@@ -52,15 +71,21 @@ const Join = () => {
         await checkUserName(name);
         onSetStrings(name);
         clearErrors('name');
-        alert(MsgAlert.Join.usableName);
+        handleToast({
+          type: 'success',
+          message: MsgAlert.Join.usableName,
+          cratedOption: { position: 'top-center' },
+        });
       } catch (err) {
-        if (err instanceof Error) {
-          alert(MsgAlert.Join.disUseableName);
-          setError('name', {
-            message: MsgAlert.Join.disUseableName,
-          });
-          onClearStrings();
-        }
+        handleToast({
+          type: 'warning',
+          message: getErrorResponseMsg(err, MsgAlert.Join.disUseableName),
+          cratedOption: { position: 'top-center' },
+        });
+        setError('name', {
+          message: MsgAlert.Join.disUseableName,
+        });
+        onClearStrings();
       }
     }
   };

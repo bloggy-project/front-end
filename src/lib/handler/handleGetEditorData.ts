@@ -3,7 +3,7 @@ import { MutableRefObject, RefObject } from 'react';
 import { convetHTMLtoString, getCheckedString } from './handleStrings';
 import { convertTagsToArray } from './handleTagNames';
 
-const getEditorData = (
+const handleGetEditorData = (
   editorRef: RefObject<Editor>,
   titleRef: MutableRefObject<HTMLInputElement | null>,
   tagNamesRef: MutableRefObject<HTMLInputElement | null>,
@@ -22,4 +22,4 @@ const getEditorData = (
   return { title, tagNames, content, subContent };
 };
 
-export default getEditorData;
+export default handleGetEditorData;
