@@ -14,14 +14,14 @@ import { FaHeart, FaRegCommentDots } from 'react-icons/fa';
 import Image from 'next/image';
 import { Content } from '@/lib/types/pages';
 import { ImageSizesProps } from '@/assets/size';
-import cutDateTime from '@/lib/handler/handleDateTime';
+import { convertDateToDays } from '@/lib/handler/handleDateTime';
 
 type ContentProps = {
   data: Content;
 };
 
 const Content = ({ data }: ContentProps) => {
-  const cuttedDateTime = cutDateTime(data.createdAt);
+  const cuttedDateTime = convertDateToDays(data.createdAt);
 
   return (
     <StyledContent>
